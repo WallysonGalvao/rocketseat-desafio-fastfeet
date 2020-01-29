@@ -46,5 +46,3 @@ App para uma transportadora fictícia, o FastFeet.
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
 ---
-
-[Entre na comunidade do Discord!](https://discordapp.com/invite/gCRAFhc)
