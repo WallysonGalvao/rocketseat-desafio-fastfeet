@@ -1,14 +1,17 @@
 import React, { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
 import logo from '~/assets/fastfeet-logo@2x.png';
 import Input from '~/components/InputForm';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 export default function SignIn() {
-    const loading = false;
     const formRef = useRef(null);
+    const dispatch = useDispatch();
+    const loading = useSelector(state => state.auth.loading);
 
     async function handleSubmit(data, { reset }) {
         try {
@@ -26,6 +29,8 @@ export default function SignIn() {
             console.tron.log(data.email, data.password);
 
             formRef.current.setErrors({});
+
+            dispatch(signInRequest(data.email, data.password));
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
                 const errorMessages = {};
