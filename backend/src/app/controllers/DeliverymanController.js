@@ -4,7 +4,7 @@ import File from '../models/File';
 
 class DeliverymanController {
     async index(req, res) {
-        const deliverymen = await Deliveryman.findAll({
+        const deliveryman = await Deliveryman.findAll({
             attributes: ['id', 'name', 'email', 'avatar_id'],
             include: [
                 {
@@ -14,7 +14,7 @@ class DeliverymanController {
                 },
             ],
         });
-        return res.json(deliverymen);
+        return res.json(deliveryman);
     }
 
     async store(req, res) {

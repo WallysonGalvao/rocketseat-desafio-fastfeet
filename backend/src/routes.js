@@ -38,10 +38,10 @@ routes.put('/recipients/:id', RecipientController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
-routes.post('/deliverymans', DeliverymanController.store);
-routes.get('/deliverymans', DeliverymanController.index);
-routes.put('/deliverymans/:id', DeliverymanController.update);
-routes.delete('/deliverymans/:id', DeliverymanController.delete);
+routes.get('/deliveryman', DeliverymanController.index);
+routes.post('/deliveryman', DeliverymanController.store);
+routes.put('/deliveryman/:id', DeliverymanController.update);
+routes.delete('/deliveryman/:id', DeliverymanController.delete);
 
 routes.post('/deliveries', DeliveryController.store);
 routes.get('/deliveries', DeliveryController.index);
