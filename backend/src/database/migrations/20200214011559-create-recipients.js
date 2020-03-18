@@ -2,29 +2,20 @@ module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.createTable('recipients', {
             id: {
-                type: Sequelize.INTEGER,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
+                type: Sequelize.INTEGER,
             },
             name: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                unique: true,
             },
             street: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
             number: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
-            complement: {
-                type: Sequelize.STRING,
-                allowNull: true,
-            },
-            state: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
@@ -32,21 +23,27 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            zipcode: {
+            postcode: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            created_at: {
-                type: Sequelize.DATE,
+            country: {
+                type: Sequelize.STRING,
                 allowNull: false,
             },
-            updated_at: {
-                type: Sequelize.DATE,
+            complement: {
+                type: Sequelize.STRING,
+            },
+            created_at: {
                 allowNull: false,
+                type: Sequelize.DATE,
+            },
+            updated_at: {
+                allowNull: false,
+                type: Sequelize.DATE,
             },
         });
     },
-
     down: queryInterface => {
         return queryInterface.dropTable('recipients');
     },

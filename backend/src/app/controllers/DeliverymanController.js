@@ -17,6 +17,26 @@ class DeliverymanController {
         return res.json(deliveryman);
     }
 
+    async show(req, res) {
+        const { id } = req.params;
+        const deliveryman = await Deliveryman.findByPk(id, {
+            attributes: ['id', 'name', 'email', 'created_at'],
+            include: [
+                {
+                    model: File,
+                    as: 'avatar',
+                    attributes: ['name', 'path', 'url', 'id'],
+                },
+            ],
+        });
+
+        if (!deliveryman) {
+            return res.status(400).json({ error: 'Recipient does not exists' });
+        }
+
+        return res.json(deliveryman);
+    }
+
     async store(req, res) {
         const schema = Yup.object(req.body).shape({
             name: Yup.string().required(),
@@ -46,6 +66,14 @@ class DeliverymanController {
     }
 
     async update(req, res) {
+        const deliveryman = await Deliveryman.findByPk(req.params.id);
+
+        if (!deliveryman) {
+            return res
+                .status(400)
+                .json({ error: 'deliveryman does not exists' });
+        }
+
         const schema = Yup.object(req.body).shape({
             name: Yup.string(),
             email: Yup.string().email(),
@@ -57,8 +85,6 @@ class DeliverymanController {
         }
 
         const { email } = req.body;
-
-        const deliveryman = await Deliveryman.findByPk(req.params.id);
 
         if (email && email !== deliveryman.email) {
             const deliverymanExists = await Deliveryman.findOne({

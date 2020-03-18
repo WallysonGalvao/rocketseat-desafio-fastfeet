@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
-import Delivery from '../models/Delivery';
+import Orders from '../models/Orders';
 import DeliveryProblem from '../models/DeliveryProblem';
 import Deliveryman from '../models/Deliveryman';
 
@@ -14,7 +14,7 @@ class DeliveryProblemController {
     async index(req, res) {
         const { id } = req.params;
 
-        const deliveryExists = await Delivery.findOne({
+        const deliveryExists = await Orders.findOne({
             where: { id },
         });
 
@@ -26,7 +26,7 @@ class DeliveryProblemController {
             where: { delivery_id: id },
             include: [
                 {
-                    model: Delivery,
+                    model: Orders,
                     as: 'delivery',
                     attributes: ['product', 'deliveryman_id', 'recipient_id'],
                 },
@@ -48,7 +48,7 @@ class DeliveryProblemController {
         const { id } = req.params;
         const { description } = req.body;
 
-        const deliveryExists = await Delivery.findOne({
+        const deliveryExists = await Orders.findOne({
             where: { id },
         });
 
@@ -77,7 +77,7 @@ class DeliveryProblemController {
                 .json({ error: 'There is no one problem here!' });
         }
 
-        const delivery = await Delivery.findByPk(
+        const delivery = await Orders.findByPk(
             deliveryProblemExists.delivery_id,
             {
                 include: [

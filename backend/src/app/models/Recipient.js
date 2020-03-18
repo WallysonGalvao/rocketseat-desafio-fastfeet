@@ -6,17 +6,16 @@ class Recipient extends Model {
             {
                 name: Sequelize.STRING,
                 street: Sequelize.STRING,
-                number: Sequelize.INTEGER,
-                complement: Sequelize.STRING,
-                state: Sequelize.STRING,
+                number: Sequelize.STRING,
                 city: Sequelize.STRING,
-                zipcode: Sequelize.STRING,
+                postcode: Sequelize.STRING,
+                country: Sequelize.STRING,
+                complement: Sequelize.STRING,
             },
             {
                 sequelize,
             }
         );
-
         return this;
     }
 }

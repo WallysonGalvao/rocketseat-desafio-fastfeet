@@ -1,20 +1,20 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Delivery extends Model {
+class Orders extends Model {
     static init(sequelize) {
         super.init(
             {
                 product: Sequelize.STRING,
+                deliveryman_id: Sequelize.STRING,
+                recipient_id: Sequelize.STRING,
                 canceled_at: Sequelize.DATE,
                 start_date: Sequelize.DATE,
                 end_date: Sequelize.DATE,
             },
             {
                 sequelize,
-                tableName: 'deliveries',
             }
         );
-
         return this;
     }
 
@@ -34,4 +34,4 @@ class Delivery extends Model {
     }
 }
 
-export default Delivery;
+export default Orders;

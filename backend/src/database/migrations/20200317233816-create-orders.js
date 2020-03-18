@@ -1,32 +1,38 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('deliveries', {
+        return queryInterface.createTable('orders', {
             id: {
-                type: Sequelize.INTEGER,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
+                type: Sequelize.INTEGER,
             },
             recipient_id: {
                 type: Sequelize.INTEGER,
-                references: { model: 'recipients', key: 'id' },
+                allowNull: false,
+                references: {
+                    model: 'recipients',
+                    key: 'id',
+                },
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
-                allowNull: false,
             },
             deliveryman_id: {
                 type: Sequelize.INTEGER,
-                references: { model: 'deliveryman', key: 'id' },
+                allowNull: false,
+                references: {
+                    model: 'deliverymans',
+                    key: 'id',
+                },
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
-                allowNull: false,
             },
             signature_id: {
                 type: Sequelize.INTEGER,
+                allowNull: true,
                 references: { model: 'files', key: 'id' },
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
-                allowNull: true,
             },
             product: {
                 type: Sequelize.STRING,
@@ -45,17 +51,16 @@ module.exports = {
                 allowNull: true,
             },
             created_at: {
-                type: Sequelize.DATE,
                 allowNull: false,
+                type: Sequelize.DATE,
             },
             updated_at: {
-                type: Sequelize.DATE,
                 allowNull: false,
+                type: Sequelize.DATE,
             },
         });
     },
-
     down: queryInterface => {
-        return queryInterface.dropTable('deliveries');
+        return queryInterface.dropTable('orders');
     },
 };

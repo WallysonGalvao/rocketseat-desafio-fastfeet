@@ -12,7 +12,7 @@ import {
     endOfDay,
 } from 'date-fns';
 
-import Delivery from '../models/Delivery';
+import Orders from '../models/Orders';
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
 
@@ -26,7 +26,7 @@ class DeliveryStatusController {
             res.status(400).json({ error: 'This Deliveryman does not exists' });
         }
 
-        const deliveries = await Delivery.findAll({
+        const deliveries = await Orders.findAll({
             where: {
                 deliveryman_id: req.body.id,
                 end_date: null,
@@ -47,7 +47,7 @@ class DeliveryStatusController {
             res.status(400).json({ error: 'This Deliveryman does not exists' });
         }
 
-        const deliveries = await Delivery.findAll({
+        const deliveries = await Orders.findAll({
             where: {
                 end_date: {
                     [Op.ne]: null,
@@ -115,7 +115,7 @@ class DeliveryStatusController {
             where: { id: deliveryman_id },
         });
 
-        const deliveryExists = await Delivery.findOne({
+        const deliveryExists = await Orders.findOne({
             where: { id: delivery_id },
         });
 
@@ -135,7 +135,7 @@ class DeliveryStatusController {
             return res.status(400).json({ error: 'Delivery does not exists' });
         }
 
-        const deliveryBelongsToDeliveryman = await Delivery.findOne({
+        const deliveryBelongsToDeliveryman = await Orders.findOne({
             where: { id: delivery_id, deliveryman_id },
         });
 
@@ -145,7 +145,7 @@ class DeliveryStatusController {
             });
         }
 
-        const ordersPickupInDay = await Delivery.findAll({
+        const ordersPickupInDay = await Orders.findAll({
             where: {
                 start_date: {
                     [Op.between]: [startOfDay(startDate), endOfDay(startDate)],
