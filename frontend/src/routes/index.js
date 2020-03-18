@@ -11,6 +11,12 @@ import CouriersNew from '~/pages/Couriers/CouriersNew';
 import OrderEdit from '~/pages/Orders/OrderEdit';
 import OrderList from '~/pages/Orders/OrderList';
 import OrderNew from '~/pages/Orders/OrderNew';
+/** Problems */
+import ProblemsList from '~/pages/Problems/ProblemsList';
+/** Recipients */
+import RecipientEdit from '~/pages/Recipients/RecipientEdit';
+import RecipientsList from '~/pages/Recipients/RecipientList';
+import RecipientNew from '~/pages/Recipients/RecipientNew';
 
 import Route from './Routes';
 
@@ -18,7 +24,6 @@ export default function routes() {
     return (
         <Switch>
             <Route path="/" exact component={SignIn} />
-
             {/** Orders */}
             <Route path="/orders" exact component={OrderList} isPrivate />
             <Route path="/orders/add" exact component={OrderNew} isPrivate />
@@ -28,7 +33,8 @@ export default function routes() {
                 component={OrderEdit}
                 isPrivate
             />
-
+            {/** Problems */}
+            <Route path="/problems" exact component={ProblemsList} isPrivate />
             {/** Couriers */}
             <Route path="/couriers" exact component={CouriersList} isPrivate />
             <Route
@@ -41,6 +47,25 @@ export default function routes() {
                 path="/couriers/edit/:id"
                 exact
                 component={CouriersEdit}
+                isPrivate
+            />
+            {/** Recipients */}
+            <Route
+                path="/recipients"
+                exact
+                component={RecipientsList}
+                isPrivate
+            />
+            <Route
+                path="/recipients/add"
+                exact
+                component={RecipientNew}
+                isPrivate
+            />
+            <Route
+                path="/recipients/edit/:id"
+                exact
+                component={RecipientEdit}
                 isPrivate
             />
         </Switch>
