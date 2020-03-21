@@ -11,7 +11,10 @@ import Details from '~/components/DeliveryDetails';
 import HeaderGoBack from '~/components/HeaderGoBack';
 import SignIn from '~/pages/SignIn';
 
+import ConfirmDelivery from './pages/ConfirmDelivery';
 import Dashboard from './pages/Dashboard';
+import AddProblem from './pages/Problems/AddProblem';
+import ProblemView from './pages/Problems/ProblemView';
 import Profile from './pages/Profile';
 
 const Stack = createStackNavigator();
@@ -37,6 +40,21 @@ function DashboarMenu() {
         options={{
           title: 'Detalhes da encomenda',
         }}
+      />
+      <Stack.Screen
+        component={AddProblem}
+        name="AddProblem"
+        options={{title: 'Informar problema'}}
+      />
+      <Stack.Screen
+        component={ProblemView}
+        name="ViewProblem"
+        options={{title: 'Visualizar problemas'}}
+      />
+      <Stack.Screen
+        component={ConfirmDelivery}
+        name="ConfirmDelivery"
+        options={{title: 'Confirmar entrega'}}
       />
     </Stack.Navigator>
   );

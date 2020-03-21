@@ -1,14 +1,19 @@
 module.exports = {
   env: {
     es6: true,
+    jest: true,
+    browser: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'prettier/react'],
+  extends: ['airbnb', 'prettier', 'prettier/react'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
-    __DEV__: 'readonly',
+    __DEV__: true,
   },
   parser: 'babel-eslint',
+  rules: {
+    strict: 0,
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -16,30 +21,42 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier', 'react-hooks', 'eslint-plugin-import-helpers'],
+  plugins: [
+    'react',
+    'jsx-a11y',
+    'import',
+    'react-hooks',
+    'prettier',
+    'eslint-plugin-import-helpers',
+  ],
   rules: {
     'prettier/prettier': 'error',
-    'react/jsx-filename-extension': [
-      'warn',
-      {
-        extensions: ['.jsx', '.js'],
-      },
-    ],
+    'react/jsx-filename-extension': ['error', {extensions: ['.js', '.jsx']}],
     'import/prefer-default-export': 'off',
-    'react/state-in-constructor': 'off',
-    'react/static-property-placement': 'off',
-    'react/sort-comp': 'off',
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+    'no-unused-vars': ['error', {argsIgnorePattern: '^_'}],
+    'react/jsx-one-expression-per-line': 'off',
+    'global-require': 'off',
+    'react-native/no-raw-text': 'off',
     'no-param-reassign': 'off',
-    'react/jsx-props-no-spreading': 'off',
     'no-underscore-dangle': 'off',
     camelcase: 'off',
+    'no-console': ['error', {allow: ['tron']}],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'react/jsx-props-no-spreading': 'off',
     'import-helpers/order-imports': [
       'warn',
       {
         newlinesBetween: 'always',
-        groups: ['/^react/', 'module', '/^~/', ['parent', 'sibling', 'index']],
+        groups: [
+          '/^react/',
+          '/^redux/',
+          '/^redux-saga/',
+          'module',
+          '/^@shared/',
+          '/^~/',
+          ['parent', 'sibling', 'index'],
+        ],
         alphabetize: {order: 'asc', ignoreCase: true},
       },
     ],
