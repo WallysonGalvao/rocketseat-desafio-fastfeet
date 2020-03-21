@@ -14,55 +14,39 @@ import {
 
 import Orders from '../models/Orders';
 import Deliveryman from '../models/Deliveryman';
-import File from '../models/File';
+import Recipient from '../models/Recipient';
 
-class DeliveryStatusController {
+class DeliveriesController {
     async index(req, res) {
-        const checkDeliverymanExists = await Deliveryman.findOne({
-            where: { id: req.body.id },
-        });
-
-        if (!checkDeliverymanExists) {
-            res.status(400).json({ error: 'This Deliveryman does not exists' });
-        }
-
-        const deliveries = await Orders.findAll({
-            where: {
-                deliveryman_id: req.body.id,
-                end_date: null,
-                canceled_at: null,
-            },
-        });
-        return res.json(deliveries);
-    }
-
-    async show(req, res) {
         const { id } = req.params;
 
-        const checkDeliverymanExists = await Deliveryman.findOne({
-            where: { id },
-        });
-
-        if (!checkDeliverymanExists) {
-            res.status(400).json({ error: 'This Deliveryman does not exists' });
+        const deliveryman = await Deliveryman.findByPk(id);
+        if (!deliveryman) {
+            return res
+                .status(401)
+                .json({ error: 'Deliveryman doest not exists.' });
         }
 
-        const deliveries = await Orders.findAll({
-            where: {
-                end_date: {
-                    [Op.ne]: null,
-                },
-            },
+        const orders = await Orders.findAll({
+            where: { deliveryman_id: id, canceled_at: null, end_date: null },
+            order: [['id', 'DESC']],
             include: [
                 {
-                    model: File,
-                    as: 'signature',
-                    attributes: ['url', 'path', 'name'],
+                    model: Recipient,
+                    as: 'recipient',
+                    attributes: [
+                        'id',
+                        'name',
+                        'street',
+                        'number',
+                        'country',
+                        'city',
+                    ],
                 },
             ],
         });
 
-        return res.json(deliveries);
+        return res.json(orders);
     }
 
     async update(req, res) {
@@ -180,4 +164,4 @@ class DeliveryStatusController {
     }
 }
 
-export default new DeliveryStatusController();
+export default new DeliveriesController();

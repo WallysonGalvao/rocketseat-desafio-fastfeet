@@ -23,15 +23,19 @@ routes.post('/users', UserController.store);
 
 routes.post('/session', SessionController.store);
 
+routes.get('/deliveryman/:id', DeliverymanController.show);
+
+routes.get('/deliveryman/:id/deliveries', DeliveriesController.index);
+
+routes.get('/deliveryman/:id/deliveredorders', DeliveredOrderController.index);
+
 /** Private Routes */
 routes.use(authMiddleware);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
-routes.get('/deliveryman/:id/deliveredorders', DeliveredOrderController.index);
 routes.put('/deliveryman/:id/deliveredorders', DeliveredOrderController.update);
 
-routes.get('/deliveryman/:id/deliveries', DeliveriesController.index);
 routes.put('/deliveryman/:id/deliveries', DeliveriesController.update);
 
 routes.get('/orders', OrderController.index);
