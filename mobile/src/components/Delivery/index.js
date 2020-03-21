@@ -29,7 +29,7 @@ export default function Delivery({data}) {
     <Container>
       <ContainerAlign>
         <Icon name="local-shipping" color={colors.primary} size={20} />
-        <DeliveryName>Delivery {data.id}</DeliveryName>
+        <DeliveryName>Entrega {data.id}</DeliveryName>
       </ContainerAlign>
 
       <MarkContainer style={{alignSelf: 'center'}}>
@@ -42,26 +42,26 @@ export default function Delivery({data}) {
 
       <StatusContainer>
         <View style={{alignItems: 'center'}}>
-          <SmallText>Waiting for</SmallText>
-          <SmallText>collection</SmallText>
+          <SmallText>Aguardando</SmallText>
+          <SmallText>retirada</SmallText>
         </View>
 
-        <SmallText>Collected</SmallText>
-        <SmallText>Delivered</SmallText>
+        <SmallText>Retirada</SmallText>
+        <SmallText>Entregue</SmallText>
       </StatusContainer>
 
       <DetailsContainer>
         <TextContainer>
-          <SmallText>Date</SmallText>
+          <SmallText>Data</SmallText>
           <DetailText>
             {data.start_date
               ? formatDate(data.start_date)
-              : 'Ready for Collect'}
+              : 'Pronta p/ retirada'}
           </DetailText>
         </TextContainer>
 
         <TextContainer>
-          <SmallText>City</SmallText>
+          <SmallText>Cidade</SmallText>
           <DetailText>{data.recipient.city.substring(0, 10)}</DetailText>
         </TextContainer>
 
@@ -69,7 +69,7 @@ export default function Delivery({data}) {
           <TouchableOpacity
             onPress={() => navigation.navigate('Details', {infos: data})}>
             <DetailText style={{color: colors.primary, fontWeight: 'bold'}}>
-              Details
+              Detalhes
             </DetailText>
           </TouchableOpacity>
         </TextContainer>

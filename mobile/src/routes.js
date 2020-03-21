@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useSelector} from 'react-redux';
 
 import 'react-native-gesture-handler';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -40,7 +41,7 @@ function MainScreen() {
       }}>
       <Tab.Screen
         component={DashboarMenu}
-        name="Deliveries"
+        name="Entregas"
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="reorder" size={size} color={color} />
@@ -52,8 +53,7 @@ function MainScreen() {
 }
 
 export default function Routes() {
-  // const { signed } = useSelector(state => state.auth);
-  const signed = true;
+  const {signed} = useSelector(state => state.auth);
   return (
     <NavigationContainer>
       <Stack.Navigator>

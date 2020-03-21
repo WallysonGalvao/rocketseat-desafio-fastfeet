@@ -1,13 +1,13 @@
 import React, {useState, useCallback} from 'react';
 import {FlatList, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-// import {useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import {useFocusEffect} from '@react-navigation/native';
 
 import Delivery from '~/components/Delivery';
 import api from '~/services/api';
-// import {signOut} from '~/store/modules/auth/actions';
+import {signOut} from '~/store/modules/auth/actions';
 
 import {
   Container,
@@ -23,11 +23,9 @@ import {
 } from './styles';
 
 function Dashboard() {
-  // const dispatch = useDispatch();
-  // const {id} = useSelector(state => state.auth);
-  // const {profile} = useSelector(state => state.user);
-  const id = 1;
-  const profile = 'Wallyson';
+  const dispatch = useDispatch();
+  const {id} = useSelector(state => state.auth);
+  const {profile} = useSelector(state => state.user);
 
   const [orders, setOrders] = useState([]);
   const [type, setType] = useState('pending');
@@ -46,11 +44,11 @@ function Dashboard() {
     useCallback(() => {
       getAvailableOrders();
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [type])
+    }, [type]),
   );
 
   function handleLogout() {
-    // dispatch(signOut());
+    dispatch(signOut());
   }
 
   return (
@@ -59,14 +57,21 @@ function Dashboard() {
         <View style={{flexDirection: 'row'}}>
           {/* <Avatar
             source={{
-              uri: profile?.avatar
-                ? profile.avatar.url
-                : 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
+              uri:
+                profile && profile.avatar
+                  ? profile.avatar.url
+                  : 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
             }}
           /> */}
+
+          <Avatar
+            source={{
+              uri: 'https://api.adorable.io/avatars/50/abott@adorable.png',
+            }}
+          />
           <TextContainer>
-            <WelcomeText>Welcome back,</WelcomeText>
-            {/* <BoldText>{profile?.name}</BoldText> */}
+            <WelcomeText>Bem-vindo de volta,</WelcomeText>
+            <BoldText>{profile ? profile.name : null}</BoldText>
           </TextContainer>
         </View>
         <Icon
@@ -79,7 +84,7 @@ function Dashboard() {
 
       <ContentContainer>
         <ContainerAlign>
-          <BoldText>Deliveries</BoldText>
+          <BoldText>Entregas</BoldText>
 
           <View
             style={{
@@ -90,13 +95,13 @@ function Dashboard() {
               onPress={() => setType('pending')}
               selected={type === 'pending'}
               style={{marginRight: 5}}>
-              <ButtonText selected={type === 'pending'}>Pending</ButtonText>
+              <ButtonText selected={type === 'pending'}>Pendentes</ButtonText>
             </ChangeButton>
 
             <ChangeButton
               onPress={() => setType('delivered')}
               selected={type === 'delivered'}>
-              <ButtonText selected={type === 'delivered'}>Delivered</ButtonText>
+              <ButtonText selected={type === 'delivered'}>Entregues</ButtonText>
             </ChangeButton>
           </View>
         </ContainerAlign>
@@ -104,7 +109,7 @@ function Dashboard() {
         <FlatList
           ListEmptyComponent={() => (
             <ButtonText style={{alignSelf: 'center'}}>
-              You have do not deliveries
+              Você não tem entregas
             </ButtonText>
           )}
           showsVerticalScrollIndicator={false}

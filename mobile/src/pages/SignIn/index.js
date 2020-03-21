@@ -1,11 +1,11 @@
 import React, {useRef} from 'react';
-// import {useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import {Form} from '@unform/mobile';
 
 import logo from '~/assets/logo.png';
 import Input from '~/components/Input';
-// import {signInRequest} from '~/store/modules/auth/actions';
+import {signInRequest} from '~/store/modules/auth/actions';
 
 import {
   Container,
@@ -16,11 +16,11 @@ import {
 } from './styles';
 
 export default function SignIn() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const formRef = useRef(null);
 
   function handleSubmit(data, {reset}) {
-    // dispatch(signInRequest(data));
+    dispatch(signInRequest(data));
     reset();
   }
   return (
