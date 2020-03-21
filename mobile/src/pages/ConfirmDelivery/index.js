@@ -34,7 +34,7 @@ export default function ConfirmDelivery({route}) {
 
   async function handleConfirm() {
     if (imgPath === null) {
-      Alert.alert('Photograph the signature');
+      Alert.alert('Fotografe a assinatura');
       return;
     }
     const dataFile = new FormData();
@@ -51,7 +51,7 @@ export default function ConfirmDelivery({route}) {
       signature_id: response.data.id,
     });
 
-    Alert.alert('Successfully delivered');
+    Alert.alert('Entregue com sucesso');
     navigation.navigate('Dashboard');
   }
   return (
@@ -61,16 +61,16 @@ export default function ConfirmDelivery({route}) {
           <Camera
             type={Camera.Constants.Type.back}
             androidCameraPermissionOptions={{
-              title: 'Permission to use camera',
-              message: 'We need your permission to use your camera',
+              title: 'Permissão para usar a câmera',
+              message: 'Precisamos da sua permissão para usar sua câmera',
               buttonPositive: 'Ok',
-              buttonNegative: 'Cancel',
+              buttonNegative: 'Cancelar',
             }}
             androidRecordAudioPermissionOptions={{
-              title: 'Permission to use audio recording',
-              message: 'We need your permission to use your audio',
+              title: 'Permissão para usar gravação de áudio',
+              message: 'Precisamos da sua permissão para usar seu áudio',
               buttonPositive: 'Ok',
-              buttonNegative: 'Cancel',
+              buttonNegative: 'Cancelar',
             }}>
             {imgPath !== null ? (
               <CameraContent source={{uri: imgPath}} />

@@ -22,7 +22,7 @@ export default function AddProblem({route}) {
       description: data.description,
       order_id: id,
     });
-    Alert.alert('Problem sent!');
+    Alert.alert('Problema enviado!');
     navigation.navigate('Dashboard');
   }
   return (

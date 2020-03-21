@@ -28,14 +28,8 @@ export default function Details({route}) {
   const data = route.params.infos;
   const navigation = useNavigation();
 
-  /* data.end_date
-                  ? 'Delivered'
-                  : data?.start_date
-                  ? 'In Progress'
-                  : 'Pending' */
-
-  const delivered = data.end_date ? 'Delivered' : data?.start_date;
-  const Pending = data?.start_date ? 'In Progress' : 'Pending';
+  const delivered = data.end_date ? 'Entregue' : null;
+  const Pending = data?.start_date ? 'A Caminho' : 'Pendente';
 
   async function handleCollect() {
     try {
@@ -43,7 +37,7 @@ export default function Details({route}) {
         start_date: new Date(),
         order_id: data.id,
       });
-      Alert.alert('Delivery collected');
+      Alert.alert('Entrega coletada');
       navigation.navigate('Dashboard');
     } catch (error) {
       Alert.alert('Withdrawal available between 08:00 and 18:00');
@@ -86,7 +80,9 @@ export default function Details({route}) {
 
             <AlignContainer>
               <InfoTextMed>Status</InfoTextMed>
-              <InfoTextSmall>Delivered</InfoTextSmall>
+              <InfoTextSmall>
+                {delivered !== null ? delivered : Pending}
+              </InfoTextSmall>
             </AlignContainer>
 
             <DateContainer>
