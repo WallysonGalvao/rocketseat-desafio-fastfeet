@@ -7,12 +7,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-// import Details from '~/components/DeliveryDetails';
+import Details from '~/components/DeliveryDetails';
 import HeaderGoBack from '~/components/HeaderGoBack';
-
 import SignIn from '~/pages/SignIn';
-import Profile from './pages/Profile';
+
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,6 +30,13 @@ function DashboarMenu() {
         component={Dashboard}
         name="Dashboard"
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        component={Details}
+        name="Details"
+        options={{
+          title: 'Detalhes da encomenda',
+        }}
       />
     </Stack.Navigator>
   );
