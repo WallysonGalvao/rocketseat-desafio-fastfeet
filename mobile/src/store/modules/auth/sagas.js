@@ -2,7 +2,7 @@ import {Alert} from 'react-native';
 
 import {takeLatest, call, put, all} from 'redux-saga/effects';
 
-import {parseISO} from 'date-fns';
+import {parseISO, format} from 'date-fns';
 
 import api from '~/services/api';
 
@@ -16,7 +16,7 @@ export function* singIn({payload}) {
       signInSuccess(id, {
         name: data.name,
         email: data.email,
-        regiter: parseISO(data.created_at),
+        created_at: format(parseISO(data.created_at), 'dd/MM/yyyy'),
         avatar: data.avatar,
       }),
     );

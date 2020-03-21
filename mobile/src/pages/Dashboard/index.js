@@ -22,7 +22,7 @@ import {
   ChangeButton,
 } from './styles';
 
-function Dashboard() {
+export default function Dashboard() {
   const dispatch = useDispatch();
   const {id} = useSelector(state => state.auth);
   const {profile} = useSelector(state => state.user);
@@ -122,5 +122,3 @@ function Dashboard() {
     </Container>
   );
 }
-
-export default Dashboard;

@@ -7,9 +7,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+// import Details from '~/components/DeliveryDetails';
 import HeaderGoBack from '~/components/HeaderGoBack';
 
 import SignIn from '~/pages/SignIn';
+import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
 
 const Stack = createStackNavigator();
@@ -45,6 +47,15 @@ function MainScreen() {
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="reorder" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        component={Profile}
+        name="Perfil"
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name="account-circle" size={size} color={color} />
           ),
         }}
       />
