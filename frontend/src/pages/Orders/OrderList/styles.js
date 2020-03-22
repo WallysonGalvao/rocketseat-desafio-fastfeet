@@ -45,6 +45,7 @@ export const TableContainer = styled.section`
             width: 3.5rem;
             height: 3.5rem;
             border-radius: 35px;
+            border: 1px solid gray;
         }
     }
     .title {

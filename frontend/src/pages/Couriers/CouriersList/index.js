@@ -29,7 +29,7 @@ export default function CouriersList() {
             <>
                 <MenuBar
                     Title="Gerenciar Entregadores"
-                    searchItem="couries"
+                    searchItem="deliverymen"
                     setLoad={setCouries}
                     to="/couriers/add"
                 />

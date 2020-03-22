@@ -16,28 +16,36 @@ export const ContentHeader = styled.div`
     div {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-content: center;
     }
 `;
 
 export const InputContainer = styled.div`
     display: flex;
-    align-items: center;
-    padding: 0 16px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    svg {
-        margin-right: 8px;
-    }
-    input {
-        padding: 13px;
-        font-size: 14px;
-        border: 0;
-        background: none;
-        color: #444;
-        ::placeholder {
-            color: #999;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 20rem;
+    div {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        color: #999;
+        /* border: 1px solid red; */
+        svg {
+            position: absolute;
+            margin-left: 4px;
+        }
+        input {
+            font-size: 16px;
+            padding-left: 32px;
+            width: 100%;
+            height: 45px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            &::placeholder {
+                color: rgba(0, 0, 0, 0.3);
+            }
         }
     }
 `;

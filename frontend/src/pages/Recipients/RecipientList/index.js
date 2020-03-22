@@ -26,7 +26,7 @@ export default function RecipientList() {
             <>
                 <MenuBar
                     Title="Gerenciar Destinatários"
-                    searchItem="recipients"
+                    searchItem="recipient"
                     setLoad={setRecipients}
                     to="/recipients/add"
                 />

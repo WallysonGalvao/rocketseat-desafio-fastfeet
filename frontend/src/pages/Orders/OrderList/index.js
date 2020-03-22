@@ -9,6 +9,7 @@ import PageButton from '~/components/PageButton';
 import api from '~/services/api';
 
 import { TableContainer } from './styles';
+import SearchInput from '~/components/SearcInput';
 
 export default function OrdersList() {
     const [orders, setOrders] = useState([]);
@@ -85,65 +86,73 @@ export default function OrdersList() {
                             <div className="divTableCell title">Ações</div>
                         </div>
 
-                        {orders.map(order => (
-                            <div className="divTableRow content" key={order.id}>
-                                <div className="divTableCell">#{order.id}</div>
-                                <div className="divTableCell">
-                                    {order.recipient.name}
-                                </div>
-                                <div className="divTableCell deliveryman">
-                                    <img
-                                        src={
-                                            order.deliveryman.avatar ? (
-                                                order.deliveryman.avatar.url
-                                            ) : (
-                                                <MdInsertPhoto
-                                                    size={10}
-                                                    color="#666"
-                                                />
-                                            )
-                                        }
-                                        alt=""
-                                    />
-                                    <span>{order.deliveryman.name}</span>
-                                </div>
-                                <div className="divTableCell">
-                                    {order.recipient.country}
-                                </div>
-                                <div className="divTableCell">
-                                    {order.recipient.city}
-                                </div>
+                        {orders.map(order => {
+                            const { avatar } = order.deliveryman;
+                            return (
                                 <div
-                                    className="divTableCell status"
-                                    style={{
-                                        background: order.status.background,
-                                    }}
+                                    className="divTableRow content"
+                                    key={order.id}
                                 >
-                                    <FaCircle
-                                        size={10}
-                                        color={order.status.textColor}
-                                    />
-                                    <span
+                                    <div className="divTableCell">
+                                        #{order.id}
+                                    </div>
+                                    <div className="divTableCell">
+                                        {order.recipient.name}
+                                    </div>
+
+                                    <div className="divTableCell deliveryman">
+                                        {avatar ? (
+                                            <img
+                                                src={avatar.url}
+                                                alt={order.deliveryman.name}
+                                            />
+                                        ) : (
+                                            <MdInsertPhoto
+                                                size={30}
+                                                color="#666"
+                                            />
+                                        )}
+
+                                        <span>{order.deliveryman.name}</span>
+                                    </div>
+                                    <div className="divTableCell">
+                                        {order.recipient.country}
+                                    </div>
+                                    <div className="divTableCell">
+                                        {order.recipient.city}
+                                    </div>
+                                    <div
+                                        className="divTableCell status"
                                         style={{
-                                            color: order.status.textColor,
+                                            background: order.status.background,
                                         }}
                                     >
-                                        {order.status.title}
-                                    </span>
+                                        <FaCircle
+                                            size={10}
+                                            color={order.status.textColor}
+                                        />
+                                        <span
+                                            style={{
+                                                color: order.status.textColor,
+                                            }}
+                                        >
+                                            {order.status.title}
+                                        </span>
+                                    </div>
+                                    <div className="divTableCell">
+                                        <ActionsMenu
+                                            moldal
+                                            page="orders"
+                                            id={order.id}
+                                            canceled={order.canceled_at}
+                                            reload={loadOrders}
+                                            content={order}
+                                            moldalType="order"
+                                        />
+                                    </div>
                                 </div>
-                                <div className="divTableCell">
-                                    <ActionsMenu
-                                        moldal
-                                        page="orders"
-                                        id={order.id}
-                                        canceled={order.canceled_at}
-                                        reload={loadOrders}
-                                        content={order}
-                                        moldalType="order"
-                                    />
-                                </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </TableContainer>
                 <PageButton setPage={setPage} page={page} length={orders} />
