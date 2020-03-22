@@ -4,16 +4,16 @@ import Recipient from '../models/Recipient';
 
 class RecipientController {
     async index(req, res) {
-        const { q: recipientName, page = 1 } = req.query;
+        const { search, page = 1 } = req.query;
 
-        if (recipientName) {
+        if (search) {
             const name = await Recipient.findAll({
                 limit: 10,
                 offset: (page - 1) * 10,
                 order: [['id', 'DESC']],
                 where: {
                     name: {
-                        [Op.iLike]: `%${recipientName}%`,
+                        [Op.iLike]: `%${search}%`,
                     },
                 },
             });

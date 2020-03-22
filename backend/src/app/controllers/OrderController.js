@@ -8,13 +8,13 @@ import File from '../models/File';
 
 class OrderController {
     async index(req, res) {
-        const { q: productName, page = 1 } = req.query;
+        const { search, page = 1 } = req.query;
 
-        if (productName) {
+        if (search) {
             const product = await Orders.findAll({
                 where: {
                     product: {
-                        [Op.iLike]: `%${productName}%`,
+                        [Op.iLike]: `%${search}%`,
                     },
                 },
                 limit: 10,

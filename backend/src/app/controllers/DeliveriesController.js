@@ -13,7 +13,6 @@ import Deliveryman from '../models/Deliveryman';
 
 class DeliveriesController {
     async index(req, res) {
-        /** query to search for undelivered and undelivered orders */
         const { id } = req.params;
 
         const deliveryman = await Deliveryman.findByPk(id);

@@ -3,32 +3,32 @@ import { Op } from 'sequelize';
 import Orders from '../models/Orders';
 import DeliveryProblem from '../models/DeliveryProblem';
 import Deliveryman from '../models/Deliveryman';
-import Queue from '../../lib/Queue';
+// import Queue from '../../lib/Queue';
 // import CancelOrder from '../jobs/CancelOrder';
 
 class DeliveryProblemController {
     async index(req, res) {
-        const { q: description, page = 1 } = req.query;
+        const { search, page = 1 } = req.query;
 
-        if (description) {
+        if (search) {
             const problems = await DeliveryProblem.findAll({
                 where: {
                     description: {
-                        [Op.iLike]: `%${description}%`,
+                        [Op.iLike]: `%${search}%`,
                     },
                 },
                 limit: 5,
                 offset: (page - 1) * 5,
                 order: [['id', 'DESC']],
             });
-            res.json(problems);
+            return res.json(problems);
         }
         const problems = await DeliveryProblem.findAll({
             limit: 5,
             offset: (page - 1) * 5,
             order: [['id', 'DESC']],
         });
-        res.json(problems);
+        return res.json(problems);
     }
 
     async show(req, res) {
