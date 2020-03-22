@@ -25,16 +25,16 @@ export default function Header() {
 
                     <ul>
                         <li>
-                            <NavLink to="/orders">Orders</NavLink>
+                            <NavLink to="/orders">Encomendas</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/recipients">Recipients</NavLink>
+                            <NavLink to="/couriers"> Entregadores</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/couriers">Couriers</NavLink>
+                            <NavLink to="/recipients">Destinatários</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/problems">Problems</NavLink>
+                            <NavLink to="/problems">Problemas</NavLink>
                         </li>
                     </ul>
                 </nav>
@@ -42,7 +42,7 @@ export default function Header() {
                 <aside>
                     <span>{profile.name}</span>
                     <button type="submit" onClick={handleSignOut}>
-                        Log Out
+                        Sair
                     </button>
                 </aside>
             </Content>

@@ -25,7 +25,7 @@ export default function RecipientList() {
         <ContentContainer>
             <>
                 <MenuBar
-                    Title="Manage Recipients"
+                    Title="Gerenciar Destinatários"
                     searchItem="recipients"
                     setLoad={setRecipients}
                     to="/recipients/add"
@@ -35,9 +35,9 @@ export default function RecipientList() {
                     <div className="divTable">
                         <div className="divTableRow title">
                             <div className="divTableCell title">ID</div>
-                            <div className="divTableCell title">Name</div>
-                            <div className="divTableCell title">Address</div>
-                            <div className="divTableCell title">Actions</div>
+                            <div className="divTableCell title">Nome</div>
+                            <div className="divTableCell title">Endereço</div>
+                            <div className="divTableCell title">Ações</div>
                         </div>
 
                         {recipients.map(item => (

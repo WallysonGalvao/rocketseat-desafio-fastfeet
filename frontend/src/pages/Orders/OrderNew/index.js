@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import ContentContainer from '~/components/ContentContainer';
 import EditBar from '~/components/EditBar';
 import Input from '~/components/InputForm';
-import SelectAsync from '~/components/Select';
+import Select from '~/components/Select';
 import api from '~/services/api';
 
 import { Container } from './styles';
@@ -27,43 +27,40 @@ export default function OrderEdit() {
             });
 
             const { product } = data;
-            const recipient_id = data.recipient;
-            const deliveryman_id = data.deliveryman;
+
             await api.post(`/orders/`, {
                 product,
-                recipient_id,
-                deliveryman_id,
+                recipient_id: data.recipient,
+                deliveryman_id: data.deliveryman,
             });
-            toast.success('Order updated successfully');
+            toast.success('Encomenda atualizada com sucesso!');
         } catch (err) {
-            toast.error('Something went wrong');
+            toast.error('Algo deu errado!');
         }
     }
     return (
         <ContentContainer>
             <>
-                <EditBar Title="Edit Order" form="editOrder" back="/orders" />
+                <EditBar
+                    Title="Cadastrar Encomenda"
+                    form="editOrder"
+                    back="/orders"
+                />
 
                 <Container>
                     <Form ref={formRef} onSubmit={handleSubmit} id="editOrder">
                         <div className="select-container">
-                            <span>Recipent</span>
-                            <SelectAsync
-                                name="recipient"
-                                optionType="recipients"
-                            />
+                            <span>Encomenda</span>
+                            <Select name="recipient" optionType="recipients" />
                         </div>
 
                         <div className="select-container">
-                            <span>Deliveryman</span>
-                            <SelectAsync
-                                name="deliveryman"
-                                optionType="couriers"
-                            />
+                            <span>Entregador</span>
+                            <Select name="deliveryman" optionType="couriers" />
                         </div>
 
                         <div className="product-container">
-                            <span>Product</span>
+                            <span>Produto</span>
                             <Input name="product" type="text" />
                         </div>
                     </Form>

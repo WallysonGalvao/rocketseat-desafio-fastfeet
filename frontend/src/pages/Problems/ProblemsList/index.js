@@ -29,7 +29,7 @@ export default function RecipientList() {
         <ContentContainer>
             <>
                 <MenuBar
-                    Title="Manage Problems"
+                    Title="Problemas na entrega"
                     searchItem="problems"
                     setLoad={setProblems}
                     to="orders/problems/add"
@@ -39,9 +39,9 @@ export default function RecipientList() {
                 <TableContainer>
                     <div className="divTable">
                         <div className="divTableRow title">
-                            <div className="divTableCell title">Order</div>
-                            <div className="divTableCell title">Problem</div>
-                            <div className="divTableCell title">Actions</div>
+                            <div className="divTableCell title">Encomenda</div>
+                            <div className="divTableCell title">Problema</div>
+                            <div className="divTableCell title">Ações</div>
                         </div>
 
                         {problems.map(item => (

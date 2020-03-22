@@ -14,11 +14,11 @@ export default function EditBar({ Title, form, back }) {
                 <aside>
                     <ButtonBack to={back}>
                         <MdKeyboardArrowLeft size={25} color="#fff" />
-                        <span>Back</span>
+                        <span>Voltar</span>
                     </ButtonBack>
                     <ButtonSave type="submit" form={form}>
                         <MdDone size={25} color="#fff" />
-                        <span>Save</span>
+                        <span>Salvar</span>
                     </ButtonSave>
                 </aside>
             </ContentHeader>

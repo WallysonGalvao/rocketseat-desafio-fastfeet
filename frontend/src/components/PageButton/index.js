@@ -12,14 +12,14 @@ export default function PageButton({ setPage, page, length }) {
                 onClick={() => setPage(page - 1)}
                 type="button"
             >
-                Back
+                Voltar
             </Button>
             <Button
                 disabled={length.length < 5}
                 type="button"
                 onClick={() => setPage(page + 1)}
             >
-                Next
+                Próximo
             </Button>
         </section>
     );

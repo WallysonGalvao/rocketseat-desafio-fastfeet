@@ -17,9 +17,9 @@ export default function SignIn() {
         try {
             const schema = Yup.object().shape({
                 email: Yup.string()
-                    .email('Valid email required')
-                    .required('You need to enter your email'),
-                password: Yup.string().required('Password Required'),
+                    .email('Necessário um e-mail válido')
+                    .required('Você precisa digitar seu email'),
+                password: Yup.string().required('Senha requerida'),
             });
 
             await schema.validate(data, {
@@ -47,7 +47,7 @@ export default function SignIn() {
     return (
         <>
             <Form ref={formRef} onSubmit={handleSubmit}>
-                <img src={logo} alt="Fast Feet" />
+                <img src={logo} alt="Fastfeet" />
 
                 <div>
                     <span>Your E-mail</span>
@@ -68,7 +68,7 @@ export default function SignIn() {
                 </div>
 
                 <button type="submit">
-                    {loading ? 'Loading...' : 'Sign In'}
+                    {loading ? 'Carregando...' : 'Entrar no sistema'}
                 </button>
             </Form>
         </>

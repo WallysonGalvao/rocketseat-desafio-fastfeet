@@ -72,28 +72,28 @@ export default function MenuBar({
                     <InputContainer>
                         <div>
                             <MdSearch size={20} color="#666" />
-                            {/* Search Orders */}
+                            {/* Encomendas */}
                             {searchItem === 'orders' && (
                                 <input
-                                    placeholder="Search Order"
+                                    placeholder="Pesquisar"
                                     onChange={e => handleSearch(e.target.value)}
                                     onKeyPress={e => handleSearchOrders(e.key)}
                                 />
                             )}
 
-                            {/* Search Couries */}
+                            {/* Entregadores */}
                             {searchItem === 'couries' && (
                                 <input
-                                    placeholder="Search Order"
+                                    placeholder="Pesquisar"
                                     onChange={e => handleSearch(e.target.value)}
                                     onKeyPress={e => handleSearchCouries(e.key)}
                                 />
                             )}
 
-                            {/* Search recipients */}
+                            {/* Destinatários */}
                             {searchItem === 'recipients' && (
                                 <input
-                                    placeholder="Search Order"
+                                    placeholder="Pesquisar"
                                     onChange={e => handleSearch(e.target.value)}
                                     onKeyPress={e =>
                                         handleSearchProblems(e.key)
@@ -101,10 +101,10 @@ export default function MenuBar({
                                 />
                             )}
 
-                            {/* Search problems */}
+                            {/* Problemas */}
                             {searchItem === 'problems' && (
                                 <input
-                                    placeholder="Search Order"
+                                    placeholder="Pesquisar"
                                     onChange={e => handleSearch(e.target.value)}
                                     onKeyPress={e =>
                                         handleSearchProblems(e.key)
@@ -119,7 +119,7 @@ export default function MenuBar({
                     ) : (
                         <ButtonContainer to={to}>
                             <MdAdd size={25} color="#fff" />
-                            <span>Add new order</span>
+                            <span>Cadastrar</span>
                         </ButtonContainer>
                     )}
                 </div>
@@ -140,7 +140,7 @@ MenuBar.propTypes = {
             background: PropTypes.string,
             textColor: PropTypes.string,
         })
-    ),
+    ).isRequired,
 };
 
 MenuBar.defaultProps = {

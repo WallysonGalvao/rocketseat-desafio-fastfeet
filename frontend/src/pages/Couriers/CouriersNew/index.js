@@ -8,6 +8,8 @@ import ContentContainer from '~/components/ContentContainer';
 import EditBar from '~/components/EditBar';
 import FileInput from '~/components/FileInput';
 import Input from '~/components/InputForm';
+
+import history from '~/services/history';
 import api from '~/services/api';
 
 import { Container } from './styles';
@@ -33,12 +35,16 @@ export default function CouriersNew() {
                 ? await api.post('files', dataFile)
                 : null;
 
-            const { name } = data;
-            const avatar_id = responseFile?.data?.id;
-            const { email } = data;
+            const { name, email } = data;
+            const avatarId = responseFile?.data?.id;
 
-            await api.post(`/deliveryman`, { name, avatar_id, email });
-            toast.success('Deliveryman updated successfully');
+            await api.post(`/deliveryman`, {
+                name,
+                email,
+                avatar_id: avatarId,
+            });
+            await toast.success('Entregador cadastrado com sucesso!');
+            history.push('/couriers');
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
                 const errorMessages = {};
@@ -49,6 +55,10 @@ export default function CouriersNew() {
                 });
 
                 formRef.current.setErrors(errorMessages);
+            } else if (err.response.status === 400) {
+                toast.error('Entregador já cadastrado!');
+            } else {
+                toast.error('Algo deu errado!');
             }
         }
     }
@@ -57,8 +67,8 @@ export default function CouriersNew() {
         <ContentContainer>
             <>
                 <EditBar
-                    Title="Edit Deliveryman"
-                    form="adddeliveryman"
+                    Title="Cadastrar Entregador"
+                    form="addDeliveryman"
                     back="/couriers"
                 />
 
@@ -66,12 +76,12 @@ export default function CouriersNew() {
                     <Form
                         ref={formRef}
                         onSubmit={handleSubmit}
-                        id="adddeliveryman"
+                        id="addDeliveryman"
                     >
                         <FileInput name="avatar" />
 
                         <div className="product-container">
-                            <span>Name</span>
+                            <span>Nome</span>
                             <Input name="name" type="text" />
                         </div>
                         <div className="product-container">

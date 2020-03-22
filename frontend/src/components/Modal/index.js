@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-export default function Moldal({
+export default function Modal({
     showModal,
     setShowModal,
     content,
@@ -33,44 +33,43 @@ export default function Moldal({
             <Container>
                 {moldalType === 'problem' ? (
                     <>
-                        <h2>View Issue</h2>
+                        <h2>Visualizar Problema</h2>
                         <p>{content.description}</p>
                     </>
                 ) : (
                     <>
-                        <h3>Delivery information</h3>
+                        <h3>Informação de entrega</h3>
                         <p>{`${content.recipient.number}, ${content.recipient.street}`}</p>
                         <p>{content.recipient.postcode}</p>
                         <p>{`${content.recipient.city}, ${content.recipient.country}`}</p>
 
-                        <h3>Dates</h3>
+                        <h3>Datas</h3>
                         <p>
-                            Withdraw:
+                            Retiradas:
                             <span>
                                 {content.start_date
                                     ? format(
                                           parseISO(content.start_date),
                                           'dd/MM/yyyy'
                                       )
-                                    : ' Ready for collect'}
+                                    : 'Pronto para retirada'}
                             </span>
                         </p>
                         <p>
-                            {' '}
-                            Delivered:
+                            Entregues:
                             <span>
                                 {content.end_date
                                     ? format(
                                           parseISO(content.end_date),
                                           'dd/MM/yyyy'
                                       )
-                                    : ' Order not delivered'}
+                                    : 'Encomendas não entregue'}
                             </span>
                         </p>
 
                         {content.signature ? (
                             <>
-                                <h3>Signature of recipient</h3>
+                                <h3>Assinatura do destinatário</h3>
                                 <img
                                     src={content.signature.url}
                                     alt={content.id}
@@ -86,7 +85,7 @@ export default function Moldal({
     );
 }
 
-Moldal.propTypes = {
+Modal.propTypes = {
     showModal: PropTypes.bool.isRequired,
     setShowModal: PropTypes.func.isRequired,
     moldalType: PropTypes.string.isRequired,

@@ -45,7 +45,7 @@ export default function PhotoInput({ name, ...rest }) {
                 ) : (
                     <>
                         <MdInsertPhoto size={40} color="#ddd" />
-                        <strong>Add photo</strong>
+                        <strong>Adicionar foto</strong>
                     </>
                 )}
                 <input

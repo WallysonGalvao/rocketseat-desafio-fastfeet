@@ -9,6 +9,8 @@ import ContentContainer from '~/components/ContentContainer';
 import EditBar from '~/components/EditBar';
 import FileInput from '~/components/FileInput';
 import Input from '~/components/InputForm';
+
+import history from '~/services/history';
 import api from '~/services/api';
 
 import { Container } from './styles';
@@ -45,13 +47,17 @@ export default function CouriersEdit() {
                 ? await api.post('files', dataFile)
                 : null;
 
-            const { name } = data;
-            const avatar_id = responseFile?.data?.id;
-            const { email } = data;
+            const { name, email } = data;
+            const avatarId = responseFile?.data?.id;
 
-            await api.put(`/deliveryman/${id}`, { name, avatar_id, email });
-            toast.success('Deliveryman updated successfully');
+            await api.put(`/deliveryman/${id}`, {
+                name,
+                avatar_id: avatarId,
+                email,
+            });
+            toast.success('Entregador atualizado com sucesso!');
             formRef.current.setErrors({});
+            history.push('/couriers');
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
                 const errorMessages = {};
@@ -62,6 +68,10 @@ export default function CouriersEdit() {
                 });
 
                 formRef.current.setErrors(errorMessages);
+            } else if (err.response.status === 400) {
+                toast.error('Entregador já cadastrado!');
+            } else {
+                toast.error('Algo deu errado!');
             }
         }
     }
@@ -70,21 +80,17 @@ export default function CouriersEdit() {
         <ContentContainer>
             <>
                 <EditBar
-                    Title="Edit Deliveryman"
-                    form="editdeliveryman"
+                    Title="Editar Entregador"
+                    form="edit"
                     back="/couriers"
                 />
 
                 <Container>
-                    <Form
-                        ref={formRef}
-                        onSubmit={handleSubmit}
-                        id="editdeliveryman"
-                    >
+                    <Form ref={formRef} onSubmit={handleSubmit} id="edit">
                         <FileInput name="avatar" />
 
                         <div className="product-container">
-                            <span>Name</span>
+                            <span>Nome</span>
                             <Input name="name" type="text" />
                         </div>
                         <div className="product-container">

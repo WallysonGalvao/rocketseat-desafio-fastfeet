@@ -61,6 +61,7 @@ const Select = ({ name, optionType, ...rest }) => {
                 options={optionType === 'recipients' ? recipients : couriers}
                 ref={selectRef}
                 classNamePrefix="react-select"
+                placeholder="Selecionar"
                 {...rest}
             />
             {error && <div>{error}</div>}

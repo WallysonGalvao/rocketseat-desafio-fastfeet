@@ -28,7 +28,7 @@ export default function CouriersList() {
         <ContentContainer>
             <>
                 <MenuBar
-                    Title="Manage Couriers"
+                    Title="Gerenciar Entregadores"
                     searchItem="couries"
                     setLoad={setCouries}
                     to="/couriers/add"
@@ -39,9 +39,9 @@ export default function CouriersList() {
                         <div className="divTableRow title">
                             <div className="divTableCell title">ID</div>
                             <div className="divTableCell title">Foto</div>
-                            <div className="divTableCell title">Name</div>
+                            <div className="divTableCell title">Nome</div>
                             <div className="divTableCell title">E-mail</div>
-                            <div className="divTableCell title">Actions</div>
+                            <div className="divTableCell title">Ações</div>
                         </div>
 
                         {couries.map(item => (

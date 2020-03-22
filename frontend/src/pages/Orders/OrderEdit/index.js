@@ -50,7 +50,7 @@ export default function OrderEdit() {
                 recipient_id: data.recipient_id,
                 deliveryman_id: data.deliveryman_id,
             });
-            toast.success('Order updated successfully');
+            toast.success('Encomenda atualizado com sucesso!');
             formRef.current.setErrors({});
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
@@ -68,12 +68,16 @@ export default function OrderEdit() {
     return (
         <ContentContainer>
             <>
-                <EditBar Title="Edit Order" form="editOrder" back="/orders" />
+                <EditBar
+                    Title="Editar Encomenda"
+                    form="editOrder"
+                    back="/orders"
+                />
 
                 <Container>
                     <Form ref={formRef} onSubmit={handleSubmit} id="editOrder">
                         <div className="select-container">
-                            <span>Recipent</span>
+                            <span>Encomenda</span>
                             <Select
                                 name="recipient_id"
                                 optionType="recipients"
@@ -81,7 +85,7 @@ export default function OrderEdit() {
                         </div>
 
                         <div className="select-container">
-                            <span>Deliveryman</span>
+                            <span>Entregador</span>
                             <Select
                                 name="deliveryman_id"
                                 optionType="couriers"
@@ -89,7 +93,7 @@ export default function OrderEdit() {
                         </div>
 
                         <div className="product-container">
-                            <span>Product</span>
+                            <span>Produto</span>
                             <Input name="product" type="text" />
                         </div>
                     </Form>

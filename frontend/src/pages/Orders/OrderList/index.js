@@ -15,22 +15,22 @@ export default function OrdersList() {
     const [page, setPage] = useState(1);
     const status = {
         delivered: {
-            title: 'Delivered',
+            title: 'Entregue',
             background: '#dff0df',
             textColor: '#2ca42b',
         },
         pending: {
-            title: 'Pending',
+            title: 'Pendente',
             background: '#dff0df',
             textColor: '#C1BC35',
         },
         withdrawn: {
-            title: 'Withdrawn',
+            title: 'Retirada',
             background: '#BAD2FF',
             textColor: '#4D85EE',
         },
         canceled: {
-            title: 'Canceled',
+            title: 'Cancelada',
             background: '#FAB0B0',
             textColor: '#DE3B3B',
         },
@@ -67,7 +67,7 @@ export default function OrdersList() {
                     setLoad={setOrders}
                     searchItem="orders"
                     status={status}
-                    Title="Order Management"
+                    Title="Gerenciar Encomendas"
                     to="/orders/add"
                 />
 
@@ -75,14 +75,14 @@ export default function OrdersList() {
                     <div className="divTable">
                         <div className="divTableRow title">
                             <div className="divTableCell title">ID</div>
-                            <div className="divTableCell title">Recipient</div>
                             <div className="divTableCell title">
-                                Deliveryman
+                                Destinatário
                             </div>
-                            <div className="divTableCell title">Country</div>
-                            <div className="divTableCell title">City</div>
+                            <div className="divTableCell title">Entregador</div>
+                            <div className="divTableCell title">Estado</div>
+                            <div className="divTableCell title">Cidade</div>
                             <div className="divTableCell title">Status</div>
-                            <div className="divTableCell title">Actions</div>
+                            <div className="divTableCell title">Ações</div>
                         </div>
 
                         {orders.map(order => (

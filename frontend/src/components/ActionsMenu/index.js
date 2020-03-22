@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { FaEllipsisH, FaEye, FaPen } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
 
 import PropTypes from 'prop-types';
 
-import Moldal from '~/components/Moldal';
+import Modal from '~/components/Modal';
 import api from '~/services/api';
 
 import {
@@ -30,26 +31,29 @@ export default function ActionsMenu({
         setVisible(!visible);
     }
 
-    async function handleDeleteOrder(id) {
-        if (window.confirm('Do you want to Cancel this Order?') === true) {
-            await api.delete(`/problem/${id}/cancel-delivery`);
+    async function handleDeleteOrder(_id) {
+        if (window.confirm('Deseja cancelar este pedido?') === true) {
+            await api.delete(`/problem/${_id}/cancel-delivery`);
             reload();
+            toast.success('Pedido excluído com sucesso!');
             handleToggleVisible();
         }
     }
 
-    async function handleDeleteCouries(id) {
-        if (window.confirm('Do you want to delete this Plan?') === true) {
-            await api.delete(`/deliveryman/${id}`);
+    async function handleDeleteCouries(_id) {
+        if (window.confirm('Deseja excluir este entregador?') === true) {
+            await api.delete(`/deliveryman/${_id}`);
             reload();
+            toast.success('Entregador excluído com sucesso!');
             handleToggleVisible();
         }
     }
 
-    async function handleDeleteRecipient(id) {
-        if (window.confirm('Do you want to delete this Plan?') === true) {
-            await api.delete(`/recipients/${id}`);
+    async function handleDeleteRecipient(_id) {
+        if (window.confirm('Deseja excluir esta encomenda?') === true) {
+            await api.delete(`/recipients/${_id}`);
             reload();
+            toast.success('Encomenda excluída com sucesso!');
             handleToggleVisible();
         }
     }
@@ -60,17 +64,17 @@ export default function ActionsMenu({
         <Container>
             <FaEllipsisH color="#999" onClick={handleToggleVisible} />
 
-            {/* Action Menu for Orders */}
+            {/* Encomendas */}
             {page === 'orders' && (
                 <NotificationList visible={visible}>
                     <Notification>
                         <button type="button" onClick={() => handleOnClick()}>
                             <FaEye color="#8E5BE8" />
-                            <span>View Order</span>
+                            <span>Visualizar</span>
                         </button>
                         <EditButton to={`/orders/edit/${id}`}>
                             <FaPen color="#4D85EE" />
-                            <span>Edit</span>
+                            <span>Editar</span>
                         </EditButton>
                         {canceled ? null : (
                             <button
@@ -78,20 +82,20 @@ export default function ActionsMenu({
                                 onClick={() => handleDeleteOrder(id)}
                             >
                                 <MdDeleteForever color="#DE3B3B" />
-                                <span>Delete</span>
+                                <span>Deletar</span>
                             </button>
                         )}
                     </Notification>
                 </NotificationList>
             )}
 
-            {/* Action Menu for couries */}
+            {/* Entregadores */}
             {page === 'couries' && (
                 <NotificationList visible={visible}>
                     <Notification>
                         <EditButton to={`/couriers/edit/${id}`}>
                             <FaPen color="#4D85EE" />
-                            <span>Edit</span>
+                            <span>Editar</span>
                         </EditButton>
                         {canceled ? null : (
                             <button
@@ -99,20 +103,20 @@ export default function ActionsMenu({
                                 onClick={() => handleDeleteCouries(id)}
                             >
                                 <MdDeleteForever color="#DE3B3B" />
-                                <span>Delete</span>
+                                <span>Deletar</span>
                             </button>
                         )}
                     </Notification>
                 </NotificationList>
             )}
 
-            {/* Action Menu for Recipients */}
+            {/* Destinatários */}
             {page === 'recipients' && (
                 <NotificationList visible={visible}>
                     <Notification>
                         <EditButton to={`/recipients/edit/${id}`}>
                             <FaPen color="#4D85EE" />
-                            <span>Edit</span>
+                            <span>Editar</span>
                         </EditButton>
                         {canceled ? null : (
                             <button
@@ -120,20 +124,20 @@ export default function ActionsMenu({
                                 onClick={() => handleDeleteRecipient(id)}
                             >
                                 <MdDeleteForever color="#DE3B3B" />
-                                <span>Delete</span>
+                                <span>Deletar</span>
                             </button>
                         )}
                     </Notification>
                 </NotificationList>
             )}
 
-            {/* Action Menu for Problems */}
+            {/* Problemas */}
             {page === 'problems' && (
                 <NotificationList visible={visible}>
                     <Notification>
                         <button type="button" onClick={() => handleOnClick()}>
                             <FaEye color="#8E5BE8" />
-                            <span>View Problem</span>
+                            <span>Visualizar</span>
                         </button>
                         {canceled ? null : (
                             <button
@@ -141,7 +145,7 @@ export default function ActionsMenu({
                                 onClick={() => handleDeleteOrder(id)}
                             >
                                 <MdDeleteForever color="#DE3B3B" />
-                                <span>Cancel Order</span>
+                                <span>Cancelar</span>
                             </button>
                         )}
                     </Notification>
@@ -149,7 +153,7 @@ export default function ActionsMenu({
             )}
 
             {moldal ? (
-                <Moldal
+                <Modal
                     showModal={showModal}
                     setShowModal={setShowModal}
                     content={content}
