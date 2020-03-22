@@ -1,130 +1,98 @@
 import * as Yup from 'yup';
-
-import { format } from 'date-fns';
-import pt from 'date-fns/locale/pt';
-
+import { Op } from 'sequelize';
 import Orders from '../models/Orders';
 import DeliveryProblem from '../models/DeliveryProblem';
 import Deliveryman from '../models/Deliveryman';
-
-import CancellationMail from '../jobs/CancellationMail';
 import Queue from '../../lib/Queue';
+// import CancelOrder from '../jobs/CancelOrder';
 
 class DeliveryProblemController {
     async index(req, res) {
-        const { id } = req.params;
+        const { q: description, page = 1 } = req.query;
 
-        const deliveryExists = await Orders.findOne({
-            where: { id },
+        if (description) {
+            const problems = await DeliveryProblem.findAll({
+                where: {
+                    description: {
+                        [Op.iLike]: `%${description}%`,
+                    },
+                },
+                limit: 5,
+                offset: (page - 1) * 5,
+                order: [['id', 'DESC']],
+            });
+            res.json(problems);
+        }
+        const problems = await DeliveryProblem.findAll({
+            limit: 5,
+            offset: (page - 1) * 5,
+            order: [['id', 'DESC']],
+        });
+        res.json(problems);
+    }
+
+    async show(req, res) {
+        const { orderId } = req.params;
+        const order = await Orders.findByPk(orderId);
+
+        const problems = await DeliveryProblem.findAll({
+            where: { order_id: orderId },
         });
 
-        if (!deliveryExists) {
-            return res.status(400).json({ error: 'Delivery does not exists' });
+        if (!order) {
+            res.status(400).json({ error: 'Order doest not exists' });
         }
 
-        const deliveryProblems = await DeliveryProblem.findAll({
-            where: { delivery_id: id },
-            include: [
-                {
-                    model: Orders,
-                    as: 'delivery',
-                    attributes: ['product', 'deliveryman_id', 'recipient_id'],
-                },
-            ],
-        });
-
-        return res.json(deliveryProblems);
+        return res.json(problems);
     }
 
     async store(req, res) {
-        const schema = Yup.object(req.body).shape({
+        const schema = Yup.object().shape({
             description: Yup.string().required(),
+            order_id: Yup.string().required(),
         });
 
         if (!(await schema.isValid(req.body))) {
-            return res.status(400).json({ error: 'Validation fail' });
+            return res.status(400).json({ error: 'Validation fails' });
+        }
+        const { description, order_id } = req.body;
+
+        const order = await Orders.findByPk(order_id);
+        if (!order) {
+            return res.status(400).json({ error: 'Order doest not exists' });
         }
 
-        const { id } = req.params;
-        const { description } = req.body;
+        const deliveryman = await Deliveryman.findByPk(order.deliveryman_id);
 
-        const deliveryExists = await Orders.findOne({
-            where: { id },
-        });
+        await DeliveryProblem.create({ description, order_id });
 
-        if (!deliveryExists) {
-            return res.status(400).json({ error: 'Delivery does not exists' });
-        }
-
-        const problem = await DeliveryProblem.create({
-            description,
-            delivery_id: id,
-        });
-
-        return res.json(problem);
+        return res.json({ description, order, deliveryman });
     }
 
     async delete(req, res) {
-        const { id } = req.params;
-
-        const deliveryProblemExists = await DeliveryProblem.findOne({
-            where: { id },
-        });
-
-        if (!deliveryProblemExists) {
-            return res
-                .status(400)
-                .json({ error: 'There is no one problem here!' });
+        const { orderId } = req.params;
+        const order = await Orders.findByPk(orderId);
+        if (!order) {
+            res.status(400).json({ error: 'Order doest not exists' });
         }
 
-        const delivery = await Orders.findByPk(
-            deliveryProblemExists.delivery_id,
-            {
-                include: [
-                    {
-                        model: Deliveryman,
-                        as: 'deliveryman',
-                        attributes: ['name', 'email'],
-                    },
-                ],
-            }
-        );
-
-        if (delivery.end_date !== null && delivery.signature_id !== null) {
-            return res.status(400).json('This delivery has been completed');
-        }
-        delivery.update(
-            {
-                canceled_at: new Date(),
-            },
-            {
-                where: {
-                    id: deliveryProblemExists.delivery_id,
-                },
-            }
-        );
-
-        const startDate = format(
-            delivery.start_date,
-            "'dia' dd 'de' MMMM', às' H:mm'h'",
-            { locale: pt }
-        );
-
-        const endDate = format(
-            delivery.end_date,
-            "'dia' dd 'de' MMMM', às' H:mm'h'",
-            { locale: pt }
-        );
-
-        await Queue.add(CancellationMail.key, {
-            delivery,
-            deliveryman: delivery.deliveryman,
-            problem: deliveryProblemExists,
-            startDate,
-            endDate,
+        const problem = await DeliveryProblem.findAll({
+            where: { order_id: orderId },
         });
+        if (!problem) {
+            res.status(400).json({ error: 'Problem doest not exists' });
+        }
 
-        return res.status(200).json();
+        const deliveryman = await Deliveryman.findByPk(order.deliveryman_id);
+
+        order.update({ canceled_at: new Date() });
+
+        /* await Queue.add(CancelOrder.key, {
+            order,
+            deliveryman,
+        }); */
+
+        res.json('Order canceled');
     }
 }
 

@@ -1,0 +1,78 @@
+module.exports = {
+    up: QueryInterface => {
+        return QueryInterface.bulkInsert(
+            'recipients',
+            [
+                {
+                    name: 'Ludwig van Beethoven',
+                    street: '1',
+                    number: '1770',
+                    city: 'Bona',
+                    postcode: '53111-53229',
+                    country: 'Renânia do Norte-Vestfália',
+                    complement: 'Distrito Urbano',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    name: 'Wolfgang Amadeus Mozart',
+                    street: '2',
+                    number: '1756',
+                    city: 'Salzburgo',
+                    postcode: '5020',
+                    country: 'Salzburgo',
+                    complement: 'Cidade estatutária',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    name: 'Johann Sebastian Bach',
+                    street: '3',
+                    number: '1685',
+                    city: 'Eisenach',
+                    postcode: '99801-99817',
+                    country: 'Turíngia',
+                    complement: 'Distrito Urbano',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    name: 'Frédéric Chopin',
+                    street: '4',
+                    number: '1810',
+                    city: 'Żelazowa Wola',
+                    postcode: '96-503',
+                    country: 'Żelazowa Wola',
+                    complement: 'Aldeia',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    name: 'Piotr Ilitch Tchaikovski',
+                    street: '5',
+                    number: '1840',
+                    city: 'Vótkinsk',
+                    postcode: '427430–427459',
+                    country: 'Udmúrtia',
+                    complement: 'Cidade Industrial',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    name: 'Antonio Vivaldi',
+                    street: '6',
+                    number: '1678',
+                    city: 'Veneza',
+                    postcode: '30100',
+                    country: 'Veneza',
+                    complement: 'Ilha',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+            ],
+            {}
+        );
+    },
+
+    down: QueryInterface => QueryInterface.bulkDelete('recipients', null, {}),
+};
