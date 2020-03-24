@@ -8,65 +8,65 @@ import api from '~/services/api';
 
 import { TableContainer } from './styles';
 
-export default function RecipientList() {
-    const [problems, setProblems] = useState([]);
+export default function ListRecipient() {
     const [page, setPage] = useState(1);
+    const [recipients, setRecipients] = useState([]);
 
-    async function loadProblems() {
-        const { data } = await api.get('/orders/problems/list', {
+    async function getRecipients() {
+        const { data } = await api.get('recipients', {
             params: {
                 page,
             },
         });
-        setProblems(data);
+
+        setRecipients(data);
     }
 
     useEffect(() => {
-        loadProblems();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        getRecipients();
     }, [page]);
     return (
         <ContentContainer>
             <>
                 <MenuBar
-                    Title="Problemas na entrega"
-                    searchItem="problems"
-                    setLoad={setProblems}
-                    to="orders/problems/add"
-                    noAdd
+                    Title="Gerenciar Destinatários"
+                    searchItem="recipient"
+                    setLoad={setRecipients}
+                    to="/recipient/add"
                 />
 
                 <TableContainer>
                     <div className="divTable">
                         <div className="divTableRow title">
-                            <div className="divTableCell title">Encomenda</div>
-                            <div className="divTableCell title">Problema</div>
+                            <div className="divTableCell title">ID</div>
+                            <div className="divTableCell title">Nome</div>
+                            <div className="divTableCell title">Endereço</div>
                             <div className="divTableCell title">Ações</div>
                         </div>
 
-                        {problems.map(item => (
+                        {recipients.map(item => (
                             <div className="divTableRow content" key={item.id}>
+                                <div className="divTableCell">#{item.id}</div>
+                                <div className="divTableCell">{item.name}</div>
                                 <div className="divTableCell">
-                                    #{item.order_id}
-                                </div>
-                                <div className="divTableCell">
-                                    {item.description}
+                                    {`${item.number}, ${item.street} / ${item.postcode} - ${item.city} / ${item.country}`}
                                 </div>
                                 <div className="divTableCell status ">
                                     <ActionsMenu
-                                        content={item}
-                                        page="problems"
-                                        id={item.order_id}
-                                        reload={loadProblems}
-                                        moldalType="problem"
-                                        moldal
+                                        page="recipient"
+                                        id={item.id}
+                                        reload={getRecipients}
                                     />
                                 </div>
                             </div>
                         ))}
                     </div>
                 </TableContainer>
-                <PageButton setPage={setPage} page={page} length={problems} />
+                <PageButton
+                    setPage={setPage}
+                    page={page}
+                    length={recipients.length}
+                />
             </>
         </ContentContainer>
     );

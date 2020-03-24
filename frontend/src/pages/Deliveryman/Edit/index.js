@@ -15,7 +15,7 @@ import api from '~/services/api';
 
 import { Container } from './styles';
 
-export default function CouriersEdit() {
+export default function EditDeliveryman() {
     const { id } = useParams();
     const formRef = useRef(null);
     useEffect(() => {
@@ -32,9 +32,9 @@ export default function CouriersEdit() {
     async function handleSubmit(data) {
         try {
             const schema = Yup.object().shape({
-                name: Yup.string().required(),
+                name: Yup.string().required('Campo obrigatório'),
                 avatar_id: Yup.string(),
-                email: Yup.string().required(),
+                email: Yup.string().required('Campo obrigatório'),
             });
             await schema.validate(data, {
                 abortEarly: false,
@@ -57,7 +57,7 @@ export default function CouriersEdit() {
             });
             toast.success('Entregador atualizado com sucesso!');
             formRef.current.setErrors({});
-            history.push('/couriers');
+            history.push('/deliveryman');
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
                 const errorMessages = {};
@@ -82,7 +82,7 @@ export default function CouriersEdit() {
                 <EditBar
                     Title="Editar Entregador"
                     form="edit"
-                    back="/couriers"
+                    back="/deliveryman"
                 />
 
                 <Container>

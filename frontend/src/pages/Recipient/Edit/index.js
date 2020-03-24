@@ -14,27 +14,27 @@ import api from '~/services/api';
 
 import { Container } from './styles';
 
-export default function RecipientEdit() {
+export default function EditRecipient() {
     const { id } = useParams();
     const formRef = useRef(null);
 
     useMemo(() => {
-        async function getRecipients() {
+        async function getRecipient() {
             const { data } = await api.get(`recipients/${id}`);
             formRef.current.setData(data);
         }
-        getRecipients();
+        getRecipient();
     }, [id]);
 
     async function handleSubmit(data) {
         try {
             const schema = Yup.object().shape({
-                name: Yup.string().required(),
-                street: Yup.string().required(),
-                number: Yup.string().required(),
-                city: Yup.string().required(),
-                postcode: Yup.string().required(),
-                country: Yup.string().required(),
+                name: Yup.string().required('Campo obrigatório'),
+                street: Yup.string().required('Campo obrigatório'),
+                number: Yup.string().required('Campo obrigatório'),
+                city: Yup.string().required('Campo obrigatório'),
+                postcode: Yup.string().required('Campo obrigatório'),
+                country: Yup.string().required('Campo obrigatório'),
                 complement: Yup.string(),
             });
             await schema.validate(data, {
@@ -45,7 +45,7 @@ export default function RecipientEdit() {
 
             toast.success('Destinatário editado com sucesso!');
             formRef.current.setErrors({});
-            history.push('/recipients');
+            history.push('/recipient');
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
                 const errorMessages = {};
@@ -69,7 +69,7 @@ export default function RecipientEdit() {
                 <EditBar
                     Title="Editar Destinatário"
                     form="edit"
-                    back="/recipients"
+                    back="/recipient"
                 />
 
                 <Container>

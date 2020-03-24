@@ -38,12 +38,13 @@ export default function Modal({
                     </>
                 ) : (
                     <>
-                        <h3>Informação de entrega</h3>
-                        <p>{`${content.recipient.number}, ${content.recipient.street}`}</p>
+                        <h3>Informação da encomenda</h3>
+                        <p>{`${content.recipient.street} - ${content.recipient.number}`}</p>
+                        <p>{`${content.recipient.city} - ${content.recipient.country}`}</p>
                         <p>{content.recipient.postcode}</p>
-                        <p>{`${content.recipient.city}, ${content.recipient.country}`}</p>
-
+                        <div />
                         <h3>Datas</h3>
+
                         <p>
                             Retiradas:
                             <span>
@@ -55,6 +56,7 @@ export default function Modal({
                                     : 'Pronto para retirada'}
                             </span>
                         </p>
+
                         <p>
                             Entregues:
                             <span>
@@ -66,6 +68,7 @@ export default function Modal({
                                     : 'Encomendas não entregue'}
                             </span>
                         </p>
+                        <div />
 
                         {content.signature ? (
                             <>

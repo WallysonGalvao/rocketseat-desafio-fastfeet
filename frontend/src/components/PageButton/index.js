@@ -15,7 +15,7 @@ export default function PageButton({ setPage, page, length }) {
                 Voltar
             </Button>
             <Button
-                disabled={length.length < 5}
+                disabled={length < 10}
                 type="button"
                 onClick={() => setPage(page + 1)}
             >

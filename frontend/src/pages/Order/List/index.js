@@ -9,9 +9,8 @@ import PageButton from '~/components/PageButton';
 import api from '~/services/api';
 
 import { TableContainer } from './styles';
-import SearchInput from '~/components/SearcInput';
 
-export default function OrdersList() {
+export default function ListOrder() {
     const [orders, setOrders] = useState([]);
     const [page, setPage] = useState(1);
     const status = {
@@ -54,11 +53,11 @@ export default function OrdersList() {
                 ? status.withdrawn
                 : status.pending,
         }));
+
         setOrders(addStatus);
     }
     useEffect(() => {
         loadOrders();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
 
     return (
@@ -66,10 +65,10 @@ export default function OrdersList() {
             <>
                 <MenuBar
                     setLoad={setOrders}
-                    searchItem="orders"
+                    searchItem="order"
                     status={status}
                     Title="Gerenciar Encomendas"
-                    to="/orders/add"
+                    to="/order/add"
                 />
 
                 <TableContainer>
@@ -142,7 +141,7 @@ export default function OrdersList() {
                                     <div className="divTableCell">
                                         <ActionsMenu
                                             moldal
-                                            page="orders"
+                                            page="order"
                                             id={order.id}
                                             canceled={order.canceled_at}
                                             reload={loadOrders}
@@ -155,7 +154,11 @@ export default function OrdersList() {
                         })}
                     </div>
                 </TableContainer>
-                <PageButton setPage={setPage} page={page} length={orders} />
+                <PageButton
+                    setPage={setPage}
+                    page={page}
+                    length={orders.length}
+                />
             </>
         </ContentContainer>
     );

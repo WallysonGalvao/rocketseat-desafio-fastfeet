@@ -7,7 +7,11 @@ export const Container = styled.div`
         text-transform: uppercase;
         margin: 10px 0;
     }
+    div {
+        border-top: 2px solid #eee;
+    }
     p {
+        margin-bottom: 5px;
         font-size: 1.6rem;
     }
     img {

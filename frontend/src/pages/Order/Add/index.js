@@ -1,5 +1,4 @@
-import React, { useRef, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useRef } from 'react';
 import { toast } from 'react-toastify';
 
 import { Form } from '@unform/web';
@@ -9,49 +8,34 @@ import ContentContainer from '~/components/ContentContainer';
 import EditBar from '~/components/EditBar';
 import Input from '~/components/InputForm';
 import Select from '~/components/Select';
+
+import history from '~/services/history';
 import api from '~/services/api';
 
 import { Container } from './styles';
 
-export default function OrderEdit() {
+export default function AddOrder() {
     const formRef = useRef(null);
-    const { id } = useParams();
-
-    useMemo(() => {
-        async function getData() {
-            const { data } = await api.get(`orders/${id}`);
-            formRef.current.setData(data);
-
-            formRef.current.setFieldValue('deliveryman_id', {
-                value: data.deliveryman.id,
-                label: data.deliveryman.name,
-            });
-
-            formRef.current.setFieldValue('recipient_id', {
-                value: data.recipient.id,
-                label: data.recipient.name,
-            });
-        }
-        getData();
-    }, [id]);
 
     async function handleSubmit(data) {
         try {
             const schema = Yup.object().shape({
-                recipient_id: Yup.string().required(),
-                deliveryman_id: Yup.string().required(),
-                product: Yup.string().required(),
+                recipient: Yup.string().required('Campo obrigatório'),
+                deliveryman: Yup.string().required('Campo obrigatório'),
+                product: Yup.string().required('Campo obrigatório'),
             });
             await schema.validate(data, {
                 abortEarly: false,
             });
-            await api.put(`/orders/${id}`, {
+
+            await api.post(`/orders/`, {
                 product: data.product,
-                recipient_id: data.recipient_id,
-                deliveryman_id: data.deliveryman_id,
+                recipient_id: data.recipient,
+                deliveryman_id: data.deliveryman,
             });
-            toast.success('Encomenda atualizado com sucesso!');
+            toast.success('Encomenda cadastrada com sucesso!');
             formRef.current.setErrors({});
+            history.push('/order');
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
                 const errorMessages = {};
@@ -62,6 +46,8 @@ export default function OrderEdit() {
                 });
 
                 formRef.current.setErrors(errorMessages);
+            } else {
+                toast.error('Algo deu errado!');
             }
         }
     }
@@ -69,27 +55,21 @@ export default function OrderEdit() {
         <ContentContainer>
             <>
                 <EditBar
-                    Title="Editar Encomenda"
-                    form="editOrder"
+                    Title="Cadastrar Encomenda"
+                    form="add"
                     back="/orders"
                 />
 
                 <Container>
-                    <Form ref={formRef} onSubmit={handleSubmit} id="editOrder">
+                    <Form ref={formRef} onSubmit={handleSubmit} id="add">
                         <div className="select-container">
                             <span>Encomenda</span>
-                            <Select
-                                name="recipient_id"
-                                optionType="recipients"
-                            />
+                            <Select name="recipient" optionType="recipients" />
                         </div>
 
                         <div className="select-container">
                             <span>Entregador</span>
-                            <Select
-                                name="deliveryman_id"
-                                optionType="couriers"
-                            />
+                            <Select name="deliveryman" optionType="couriers" />
                         </div>
 
                         <div className="product-container">

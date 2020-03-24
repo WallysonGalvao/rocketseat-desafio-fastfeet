@@ -32,10 +32,10 @@ export default function ActionsMenu({
     }
 
     async function handleDeleteOrder(_id) {
-        if (window.confirm('Deseja cancelar este pedido?') === true) {
+        if (window.confirm('Deseja cancelar esta encomenda?') === true) {
             await api.delete(`/problem/${_id}/cancel-delivery`);
             reload();
-            toast.success('Pedido excluído com sucesso!');
+            toast.success('Encomenda excluída com sucesso!');
             handleToggleVisible();
         }
     }
@@ -50,10 +50,10 @@ export default function ActionsMenu({
     }
 
     async function handleDeleteRecipient(_id) {
-        if (window.confirm('Deseja excluir esta encomenda?') === true) {
+        if (window.confirm('Deseja excluir este destinatário?') === true) {
             await api.delete(`/recipients/${_id}`);
             reload();
-            toast.success('Encomenda excluída com sucesso!');
+            toast.success('Destinatário excluído com sucesso!');
             handleToggleVisible();
         }
     }
@@ -65,14 +65,14 @@ export default function ActionsMenu({
             <FaEllipsisH color="#999" onClick={handleToggleVisible} />
 
             {/* Encomendas */}
-            {page === 'orders' && (
+            {page === 'order' && (
                 <NotificationList visible={visible}>
                     <Notification>
                         <button type="button" onClick={() => handleOnClick()}>
                             <FaEye color="#8E5BE8" />
                             <span>Visualizar</span>
                         </button>
-                        <EditButton to={`/orders/edit/${id}`}>
+                        <EditButton to={`/order/edit/${id}`}>
                             <FaPen color="#4D85EE" />
                             <span>Editar</span>
                         </EditButton>
@@ -82,7 +82,7 @@ export default function ActionsMenu({
                                 onClick={() => handleDeleteOrder(id)}
                             >
                                 <MdDeleteForever color="#DE3B3B" />
-                                <span>Deletar</span>
+                                <span>Cancelar</span>
                             </button>
                         )}
                     </Notification>
@@ -90,10 +90,10 @@ export default function ActionsMenu({
             )}
 
             {/* Entregadores */}
-            {page === 'couries' && (
+            {page === 'deliveryman' && (
                 <NotificationList visible={visible}>
                     <Notification>
-                        <EditButton to={`/couriers/edit/${id}`}>
+                        <EditButton to={`/deliveryman/edit/${id}`}>
                             <FaPen color="#4D85EE" />
                             <span>Editar</span>
                         </EditButton>
@@ -111,10 +111,10 @@ export default function ActionsMenu({
             )}
 
             {/* Destinatários */}
-            {page === 'recipients' && (
+            {page === 'recipient' && (
                 <NotificationList visible={visible}>
                     <Notification>
-                        <EditButton to={`/recipients/edit/${id}`}>
+                        <EditButton to={`/recipient/edit/${id}`}>
                             <FaPen color="#4D85EE" />
                             <span>Editar</span>
                         </EditButton>
@@ -132,7 +132,7 @@ export default function ActionsMenu({
             )}
 
             {/* Problemas */}
-            {page === 'problems' && (
+            {page === 'problem' && (
                 <NotificationList visible={visible}>
                     <Notification>
                         <button type="button" onClick={() => handleOnClick()}>

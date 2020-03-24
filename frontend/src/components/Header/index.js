@@ -19,22 +19,22 @@ export default function Header() {
         <Container>
             <Content>
                 <nav>
-                    <NavLink to="/orders">
+                    <NavLink to="/order">
                         <img src={logo} alt="fastfeet" />
                     </NavLink>
 
                     <ul>
                         <li>
-                            <NavLink to="/orders">Encomendas</NavLink>
+                            <NavLink to="/order">Encomendas</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/couriers"> Entregadores</NavLink>
+                            <NavLink to="/deliveryman"> Entregadores</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/recipients">Destinatários</NavLink>
+                            <NavLink to="/recipient">Destinatários</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/problems">Problemas</NavLink>
+                            <NavLink to="/problem">Problemas</NavLink>
                         </li>
                     </ul>
                 </nav>

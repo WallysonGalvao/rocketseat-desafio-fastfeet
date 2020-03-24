@@ -8,30 +8,30 @@ import api from '~/services/api';
 
 import { TableContainer } from './styles';
 
-export default function CouriersList() {
+export default function DeliverymanList() {
     const [page, setPage] = useState(1);
-    const [couries, setCouries] = useState([]);
+    const [deliverymen, setDeliverymen] = useState([]);
 
-    async function getCouries() {
+    async function getDeliverymen() {
         const { data } = await api.get('deliveryman', {
             params: {
                 page,
             },
         });
-        setCouries(data);
+        setDeliverymen(data);
     }
 
     useEffect(() => {
-        getCouries();
+        getDeliverymen();
     }, [page]);
     return (
         <ContentContainer>
             <>
                 <MenuBar
                     Title="Gerenciar Entregadores"
-                    searchItem="deliverymen"
-                    setLoad={setCouries}
-                    to="/couriers/add"
+                    searchItem="deliveryman"
+                    setLoad={setDeliverymen}
+                    to="/deliveryman/add"
                 />
 
                 <TableContainer>
@@ -44,7 +44,7 @@ export default function CouriersList() {
                             <div className="divTableCell title">Ações</div>
                         </div>
 
-                        {couries.map(item => (
+                        {deliverymen.map(item => (
                             <div className="divTableRow content" key={item.id}>
                                 <div className="divTableCell">#{item.id}</div>
                                 <div className="divTableCell">
@@ -62,16 +62,20 @@ export default function CouriersList() {
                                 <div className="divTableCell status ">
                                     <ActionsMenu
                                         id={item.id}
-                                        page="couries"
+                                        page="deliveryman"
                                         item={item}
-                                        reload={getCouries}
+                                        reload={getDeliverymen}
                                     />
                                 </div>
                             </div>
                         ))}
                     </div>
                 </TableContainer>
-                <PageButton setPage={setPage} page={page} length={couries} />
+                <PageButton
+                    setPage={setPage}
+                    page={page}
+                    length={deliverymen.length}
+                />
             </>
         </ContentContainer>
     );

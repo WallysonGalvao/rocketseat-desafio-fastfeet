@@ -17,13 +17,14 @@ export default function MenuBar({
 }) {
     const [search, setSearch] = useState('');
 
+    /*
     async function handleSearchOrders() {
         const { data } = await api.get('orders', {
             params: {
                 search,
             },
         });
-        /* const addStatus = data.map(response => ({
+        const addStatus = data.map(response => ({
             ...response,
             status: response.canceled_at
                 ? status.canceled
@@ -33,7 +34,7 @@ export default function MenuBar({
                 ? status.withdrawn
                 : status.pending,
         }));
-        debugger; */
+        debugger;
 
         const newStatus = [
             'canceled_at',
@@ -54,15 +55,6 @@ export default function MenuBar({
         setLoad(addStatus);
     }
 
-    async function handleSearchDeliverymen() {
-        const { data } = await api.get('deliveryman', {
-            params: {
-                search,
-            },
-        });
-        setLoad(data);
-    }
-
     async function handleSearchRecipient() {
         const { data } = await api.get('recipients', {
             params: {
@@ -80,51 +72,66 @@ export default function MenuBar({
         });
         setLoad(data);
     }
+    */
 
-    function handleSearch(input) {
-        setSearch(input);
+    async function handleSearch(item) {
+        let path;
+
+        switch (item) {
+            case 'order':
+                path = 'orders';
+                break;
+            case 'recipient':
+                path = 'recipients';
+                break;
+            case 'problem':
+                path = 'orders/problems/list';
+                break;
+            default:
+                path = item;
+                break;
+        }
+
+        const { data } = await api.get(path, {
+            params: {
+                search,
+            },
+        });
+
+        if (item === 'order') {
+            const newStatus = [
+                'canceled_at',
+                'end_date',
+                'start_date',
+            ].find(value => data.find(res => res[value]));
+
+            if (newStatus === 'canceled_at') status = status.canceled;
+            if (newStatus === 'start_date') status = status.withdrawn;
+            if (newStatus === 'end_date') status = status.delivered;
+            else status = status.pending;
+
+            const addStatus = data.map(response => ({
+                ...response,
+                status,
+            }));
+
+            setLoad(addStatus);
+            return;
+        }
+        setLoad(data);
     }
+
     return (
         <ContentHeader>
             <h2>{Title}</h2>
             <div>
                 <InputContainer>
                     <MdSearch size={20} color="#666" />
-                    {/* Encomendas */}
-                    {searchItem === 'orders' && (
-                        <input
-                            placeholder="Pesquisar"
-                            onChange={e => handleSearch(e.target.value)}
-                            onKeyPress={handleSearchOrders}
-                        />
-                    )}
-
-                    {/* Entregadores */}
-                    {searchItem === 'deliverymen' && (
-                        <input
-                            placeholder="Pesquisar"
-                            onChange={e => handleSearch(e.target.value)}
-                            onKeyPress={handleSearchDeliverymen}
-                        />
-                    )}
-
-                    {/* Destinatários */}
-                    {searchItem === 'recipient' && (
-                        <input
-                            placeholder="Pesquisar"
-                            onChange={e => handleSearch(e.target.value)}
-                            onKeyPress={handleSearchRecipient}
-                        />
-                    )}
-
-                    {/* Problemas */}
-                    {searchItem === 'problems' && (
-                        <input
-                            placeholder="Pesquisar"
-                            onChange={e => handleSearch(e.target.value)}
-                            onKeyPress={handleSearchProblems}
-                        />
-                    )}
+                    <input
+                        placeholder="Pesquisar"
+                        onChange={({ target }) => setSearch(target.value)}
+                        onKeyPress={() => handleSearch(searchItem)}
+                    />
                 </InputContainer>
 
                 {!noAdd && (
