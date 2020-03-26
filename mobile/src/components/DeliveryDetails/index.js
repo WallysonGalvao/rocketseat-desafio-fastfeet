@@ -37,7 +37,7 @@ export default function Details({route}) {
         start_date: new Date(),
         order_id: data.id,
       });
-      Alert.alert('Entrega coletada');
+      Alert.alert('Encomenda coletada');
       navigation.navigate('Dashboard');
     } catch (error) {
       Alert.alert('Withdrawal available between 08:00 and 18:00');
@@ -109,7 +109,7 @@ export default function Details({route}) {
             ) : (
               <Bottons onPress={handleCollect}>
                 <Icon name="assignment-turned-in" size={25} color="#0F4C81" />
-                <ButtonText> Coletar {'\n'} Entrega</ButtonText>
+                <ButtonText> Coletar {'\n'} Encomenda</ButtonText>
               </Bottons>
             )}
 
@@ -133,7 +133,7 @@ export default function Details({route}) {
                   navigation.navigate('ConfirmDelivery', {infos: data})
                 }>
                 <Icon name="check-circle" size={25} color={colors.primary} />
-                <ButtonText>Confirmar {'\n'} Entrega</ButtonText>
+                <ButtonText>Confirmar {'\n'} Encomenda</ButtonText>
               </Bottons>
             ) : (
               undefined

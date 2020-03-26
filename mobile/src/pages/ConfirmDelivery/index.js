@@ -44,11 +44,11 @@ export default function ConfirmDelivery({route}) {
       type: 'image/jpeg',
     });
 
-    const response = await api.post('files', dataFile);
+    const {data} = await api.post('files', dataFile);
 
     await api.put(`/deliveryman/${deliverymanId}/deliveredorders`, {
       orderId: id,
-      signature_id: response.data.id,
+      signature_id: data.id,
     });
 
     Alert.alert('Entregue com sucesso');

@@ -43,8 +43,7 @@ export default function Dashboard() {
   useFocusEffect(
     useCallback(() => {
       getAvailableOrders();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [type]),
+    }, [type])
   );
 
   function handleLogout() {
@@ -55,18 +54,9 @@ export default function Dashboard() {
     <Container>
       <HeaderContainer>
         <View style={{flexDirection: 'row'}}>
-          {/* <Avatar
-            source={{
-              uri:
-                profile && profile.avatar
-                  ? profile.avatar.url
-                  : 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
-            }}
-          /> */}
-
           <Avatar
             source={{
-              uri: 'https://api.adorable.io/avatars/50/abott@adorable.png',
+              uri: profile?.avatar,
             }}
           />
           <TextContainer>

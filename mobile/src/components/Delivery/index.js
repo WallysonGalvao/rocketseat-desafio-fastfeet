@@ -29,7 +29,7 @@ export default function Delivery({data}) {
     <Container>
       <ContainerAlign>
         <Icon name="local-shipping" color={colors.primary} size={20} />
-        <DeliveryName>Entrega {data.id}</DeliveryName>
+        <DeliveryName>Encomenda {data.id}</DeliveryName>
       </ContainerAlign>
 
       <MarkContainer style={{alignSelf: 'center'}}>

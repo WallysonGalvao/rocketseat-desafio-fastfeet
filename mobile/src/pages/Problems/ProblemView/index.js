@@ -31,7 +31,7 @@ export default function ViewProblem({route}) {
     <Background>
       <Container>
         <WrappContainer>
-          <Title>Entrega {id}</Title>
+          <Title>Encomenda {id}</Title>
 
           {problems.length > 0 ? (
             problems.map(problem => (
