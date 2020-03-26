@@ -3,8 +3,6 @@ import styled from 'styled-components/native';
 export const ProblemText = styled.Text`
   color: #999999;
   font-size: 16px;
-  /* flex: 1;
-  flex-wrap: 'wrap'; */
   flex-shrink: 1;
 `;
 
