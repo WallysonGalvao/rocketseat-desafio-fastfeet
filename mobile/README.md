@@ -13,31 +13,35 @@
 <strong>Frontend</strong> da aplicação FastFeet.
 </h2>
 
-## 🚀 Sobre a plataforma
+## 🚀 Sobre a aplicação
 
-A versão web do projeto FastFeet representa a visão da distribuidora, ou seja, todas funcionalidades presentes na versão web são para administradores. As funcionalidades para o entregador serão dispostas no aplicativo mobile.
+A versão mobile do projeto FastFeet representa a visão do entregador, ou seja, todas funcionalidades presentes nesse projeto são para entregadores.
 
 ## 🎨 Layout
 
-O layout do sistema está em anexo como um arquivo `.xd`.
+O layout do desafio está em anexo como um arquivo `.xd`.
 
-Você pode utilizar a seguinte URL para visualizar todas as telas: [Visualizar](https://xd.adobe.com/view/62e829fc-4f10-4ac8-70d2-d39b429d43ee-14d9/grid/)
+Você pode utilizar a seguinte URL para visualizar todas as telas: [Visualizar](https://xd.adobe.com/view/a5d56d7d-c1d4-48a8-70ce-8b77f5f417a5-d3e4/grid).
 
 ## :zap: Rodando o projeto
 
-1 - Em um terminal, entrar na raiz do projeto **/frontend** e rodar o comando:
+1 - Em um terminal, entrar na raiz do projeto **/mobile** e rodar o comando:
 
 ```
 $ yarn install
 ```
 
-2 - Ainda na raiz do projeto, rodar o comando:
+2a - Ainda na raiz do projeto, rodar o seguinte comando se estiver com um emulador Android:
 
 ```
-$ yarn start
+$ yarn android
 ```
 
-Feito isso, acessar o endereço http://localhost:3000
+2b - Ainda na raiz do projeto, rodar o seguinte comando se estiver com um emulador iOS:
+
+```
+$ yarn ios
+```
 
 ## :memo: Licença
 

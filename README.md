@@ -1,10 +1,19 @@
+<div align="center">
+    <img alt="FastFeet" title="#delicinha" src=".github/gostack.png" width="250px" />
+</div>
 <h1 align="center">
     <img alt="FastFeet" title="#delicinha" src=".github/fastfeet.png" width="250px" />
+    
 </h1>
 
 <h4 align="center">
   🚀 Desafio FastFeet
 </h4>
+
+<p>
+Esse desafio faz parte do Desafio Final, que é uma aplicação completa (Back-end, Front-end e Mobile) que é avaliada para emissão do Certificado do Bootcamp GoStack.
+</p>
+
 <p align="center">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/WallysonGalvao/rocketseat-desafio-fastfeet">
 
@@ -22,24 +31,30 @@
 </p>
 
 <p align="center">
-  <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>
 </p>
-
 <br>
+
+## 💻 Projeto
+
+App para uma transportadora fictícia, o FastFeet.
+
+<p>Para mais informações sobre o projeto acesse os links:</p>
+
+[Desafio 1](https://github.com/rocketseat/bootcamp-gostack-desafio-02) | [Desafio 2](https://github.com/rocketseat/bootcamp-gostack-desafio-03) | [Desafio 3](https://github.com/rocketseat/bootcamp-gostack-desafio-09) | [Desafio 4](https://github.com/rocketseat/bootcamp-gostack-desafio-10)
 
 ## :rocket: Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - [Node.js](https://nodejs.org/en/)
-- [React](https://reactjs.org)
-- [React Native](https://facebook.github.io/react-native/)
-
-## 💻 Projeto
-
-App para uma transportadora fictícia, o FastFeet.
+- [React](https://reactjs.org/)
+- [Docker](https://www.docker.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Express](https://github.com/expressjs/express)
+- [Redis](https://redis.io/)
 
 ## :memo: Licença
 
