@@ -15,7 +15,7 @@
 
 ## :rocket: Tecnologias
 
-### **Um pouco sobre as ferramentas**
+### **Ferramentas usadas**
 
 -   Express + Queue
 -   JWT + Bcryptjs
@@ -51,7 +51,7 @@ Cadastro de encomendas por entregador.
 
 ### 1. Visualizar encomendas
 
-Autenticação apenas seu ID de cadastro (ID do entregador no banco de dados).
+Autenticação apenas por ID de cadastro (ID do entregador no banco de dados).
 
 ### 2. Alterar status de encomendas
 

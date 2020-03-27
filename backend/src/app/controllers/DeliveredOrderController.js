@@ -50,7 +50,7 @@ class DeliveredOrderController {
 
     async update(req, res) {
         const schema = Yup.object().shape({
-            orderId: Yup.string().required(),
+            order_id: Yup.string().required(),
             signature_id: Yup.string().required(),
         });
 
@@ -58,10 +58,10 @@ class DeliveredOrderController {
             return res.status(400).json({ error: 'Validation fails' });
         }
 
-        const { orderId, signature_id } = req.body;
-        const order = await Orders.findByPk(orderId);
+        const { order_id, signature_id } = req.body;
+        const order = await Orders.findByPk(order_id);
 
-        if (!orderId || !signature_id) {
+        if (!order_id || !signature_id) {
             return res.status(400).json({ error: 'Validation fails' });
         }
 
