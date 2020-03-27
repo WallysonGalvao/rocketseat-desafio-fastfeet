@@ -6,6 +6,7 @@
   <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#collision-funcionalidades">Funcionalidades</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#zap-rodando-o-projeto">Rodando o Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#notebook-enpoints">Endpoints</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>
 </p>
 
@@ -83,6 +84,12 @@ Se desejar, pode rodar o projeto em modo debug, usando o seguinte comando:
 ```
 $ yarn dubug
 ```
+
+## :notebook: Execute os endpoints no Insomnia
+
+Você pode executar online ou fazer o download dos endpoints e executar diretamente no Insomnia:
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=FasfFeet&uri=https%3A%2F%2Fraw.githubusercontent.com%2FWallysonGalvao%2Frocketseat-desafio-fastfeet%2Fmaster%2Fbackend%2Frequests.json)
 
 ## :memo: Licença
 
