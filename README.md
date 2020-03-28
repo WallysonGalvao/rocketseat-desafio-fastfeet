@@ -33,6 +33,7 @@ Esse desafio faz parte do Desafio Final, que é uma aplicação completa (Back-e
 <p align="center">
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rocket-executando">Executando</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>
 </p>
 <br>
@@ -55,6 +56,10 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [PostgreSQL](https://www.postgresql.org/)
 - [Express](https://github.com/expressjs/express)
 - [Redis](https://redis.io/)
+
+## :notebook: Executando
+
+Dentro do **README** de cada subpasta do projeto é detalhado como executar as aplicações.
 
 ## :memo: Licença
 

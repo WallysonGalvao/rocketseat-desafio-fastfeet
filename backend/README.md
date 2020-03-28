@@ -64,6 +64,32 @@ Permite que o entregador cadastre problemas nas entregas.
 
 ## :zap: Rodando o projeto
 
+### Docker
+
+1 - É preciso ter o [Docker](https://www.docker.com/) instaldo em sua máquina. Feito a instalação, rodar os seguintes comandos:
+
+```
+$ docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+$ docker run --name redisfastfeet -p 6379:6379 -d -t redis:alpine
+$ docker run --name mongofastfeet -p 27017:27017 -d -t mongo
+```
+
+2 - Após executar os comandos acima, verificar se as imagens estão rodando no terminal:
+
+```
+$ docker ps
+```
+
+3 - Caos as imagens estejam paradas/ não aparecer no terminal, executar:
+
+```
+$ docker start database
+$ docker start mongofastfeet
+$ docker start redisfastfeet
+```
+
+### Backend
+
 1 - Em um terminal, entrar na raiz do projeto **/backend** e rodar o comando:
 
 ```
@@ -85,14 +111,18 @@ Se desejar, pode rodar o projeto em modo debug, usando o seguinte comando:
 $ yarn dubug
 ```
 
-## :notebook: Execute os endpoints no Insomnia
+### Migrations
+
+Para a criar e popular o banco de dados, é disponibilizado **migrations** e **seeds** dentro do diretório **/src/database**, rodar o seguinte comando na raiz do projeto:
+
+```
+$ yarn sequelize db:migrate
+```
+
+## :notebook: Endpoints
 
 Você pode executar online ou fazer o download dos endpoints e executar diretamente no Insomnia:
 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=FasfFeet&uri=https%3A%2F%2Fraw.githubusercontent.com%2FWallysonGalvao%2Frocketseat-desafio-fastfeet%2Fmaster%2Fbackend%2Frequests.json)
-
-## :memo: Licença
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
 ---
