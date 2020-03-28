@@ -6,6 +6,9 @@ import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
 
+import Queue from '../../lib/Queue';
+import newOrder from '../jobs/newOrder';
+
 class OrderController {
     async index(req, res) {
         const { search, page = 1 } = req.query;
@@ -191,6 +194,18 @@ class OrderController {
         }
 
         Orders.create({ product, recipient_id, deliveryman_id });
+
+        await Queue.add(newOrder.key, {
+            deliverymanName: deliveryman.name,
+            deliverymanEmail: deliveryman.email,
+            recipientName: recipient.name,
+            recipientStreet: recipient.street,
+            recipientNumber: recipient.number,
+            recipientCity: recipient.city,
+            recipientPostcode: recipient.postcode,
+            recipientCountry: recipient.country,
+            recipientComplement: recipient.complement,
+        });
 
         return res.json({
             id,

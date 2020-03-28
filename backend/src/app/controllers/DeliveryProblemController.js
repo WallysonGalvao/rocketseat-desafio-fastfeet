@@ -3,8 +3,8 @@ import { Op } from 'sequelize';
 import Orders from '../models/Orders';
 import DeliveryProblem from '../models/DeliveryProblem';
 import Deliveryman from '../models/Deliveryman';
-// import Queue from '../../lib/Queue';
-// import CancelOrder from '../jobs/CancelOrder';
+import Queue from '../../lib/Queue';
+import CancelOrder from '../jobs/CancelOrder';
 
 class DeliveryProblemController {
     async index(req, res) {
@@ -87,10 +87,10 @@ class DeliveryProblemController {
 
         order.update({ canceled_at: new Date() });
 
-        /* await Queue.add(CancelOrder.key, {
+        await Queue.add(CancelOrder.key, {
             order,
             deliveryman,
-        }); */
+        });
 
         res.json('Order canceled');
     }

@@ -6,8 +6,7 @@
   <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#collision-funcionalidades">Funcionalidades</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#zap-rodando-o-projeto">Rodando o Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#notebook-enpoints">Endpoints</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <a href="#notebook-enpoints">Endpoints</a>
 </p>
 
 <h2>
@@ -71,7 +70,6 @@ Permite que o entregador cadastre problemas nas entregas.
 ```
 $ docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 $ docker run --name redisfastfeet -p 6379:6379 -d -t redis:alpine
-$ docker run --name mongofastfeet -p 27017:27017 -d -t mongo
 ```
 
 2 - Após executar os comandos acima, verificar se as imagens estão rodando no terminal:
@@ -84,7 +82,6 @@ $ docker ps
 
 ```
 $ docker start database
-$ docker start mongofastfeet
 $ docker start redisfastfeet
 ```
 
