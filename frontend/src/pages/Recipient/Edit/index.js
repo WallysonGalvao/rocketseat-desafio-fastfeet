@@ -12,6 +12,8 @@ import Input from '~/components/InputForm';
 import history from '~/services/history';
 import api from '~/services/api';
 
+import { cpfMask } from '../../../utils/mask';
+
 import { Container } from './styles';
 
 export default function EditRecipient() {
@@ -21,6 +23,9 @@ export default function EditRecipient() {
     useMemo(() => {
         async function getRecipient() {
             const { data } = await api.get(`recipients/${id}`);
+
+            data.postcode = cpfMask(data.postcode);
+
             formRef.current.setData(data);
         }
         getRecipient();
@@ -110,7 +115,11 @@ export default function EditRecipient() {
 
                                 <div className="input-container">
                                     <span>CEP</span>
-                                    <Input name="postcode" type="text" />
+                                    <Input
+                                        name="postcode"
+                                        type="text"
+                                        maxlength="8"
+                                    />
                                 </div>
                             </div>
                         </div>

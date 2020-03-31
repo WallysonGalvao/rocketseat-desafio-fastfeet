@@ -21,7 +21,7 @@ export function* signIn({ payload }) {
 
         yield put(signInSuccess(token, user));
 
-        history.push('/orders');
+        history.push('/order');
     } catch (err) {
         toast.error(err.response.data.error);
 

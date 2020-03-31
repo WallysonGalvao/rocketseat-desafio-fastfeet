@@ -74,7 +74,7 @@ export default function EditOrder() {
                 <EditBar
                     Title="Editar Encomenda"
                     form="editOrder"
-                    back="/orders"
+                    back="/order"
                 />
 
                 <Container>

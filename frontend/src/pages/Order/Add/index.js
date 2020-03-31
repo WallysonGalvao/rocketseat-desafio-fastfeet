@@ -54,11 +54,7 @@ export default function AddOrder() {
     return (
         <ContentContainer>
             <>
-                <EditBar
-                    Title="Cadastrar Encomenda"
-                    form="add"
-                    back="/orders"
-                />
+                <EditBar Title="Cadastrar Encomenda" form="add" back="/order" />
 
                 <Container>
                     <Form ref={formRef} onSubmit={handleSubmit} id="add">

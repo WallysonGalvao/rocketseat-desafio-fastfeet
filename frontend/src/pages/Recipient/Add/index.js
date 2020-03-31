@@ -92,13 +92,17 @@ export default function AddRecipient() {
                                 </div>
 
                                 <div className="input-container">
-                                    <span>Estada</span>
+                                    <span>Estado</span>
                                     <Input name="country" type="text" />
                                 </div>
 
                                 <div className="input-container">
                                     <span>CEP</span>
-                                    <Input name="postcode" type="text" />
+                                    <Input
+                                        name="postcode"
+                                        type="text"
+                                        maxlength="8"
+                                    />
                                 </div>
                             </div>
                         </div>

@@ -26,8 +26,6 @@ export default function SignIn() {
                 abortEarly: false,
             });
 
-            console.tron.log(data.email, data.password);
-
             formRef.current.setErrors({});
 
             dispatch(signInRequest(data.email, data.password));

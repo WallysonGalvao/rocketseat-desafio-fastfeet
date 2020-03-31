@@ -4,7 +4,9 @@ import ActionsMenu from '~/components/ActionsMenu';
 import ContentContainer from '~/components/ContentContainer';
 import MenuBar from '~/components/MenuBar';
 import PageButton from '~/components/PageButton';
+
 import api from '~/services/api';
+import { cpfMask } from '../../../utils/mask';
 
 import { TableContainer } from './styles';
 
@@ -18,7 +20,7 @@ export default function ListRecipient() {
                 page,
             },
         });
-
+        data.forEach(el => (el.postcode = cpfMask(el.postcode)));
         setRecipients(data);
     }
 
